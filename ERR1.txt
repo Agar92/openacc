@@ -1,0 +1,622 @@
+[ 25%] Building CXX object CMakeFiles/Test.dir/nbody.cpp.o
+"/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fusion/T3DataHolder.h",
+          line 828: warning: variable "check" was declared but never referenced
+            bool check=false;
+                 ^
+
+"/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fusion/T3Process.h",
+          line 101: warning: missing return statement at end of non-void
+          function "lambda []()->double"
+      }();
+      ^
+          detected during:
+            instantiation of "auto t3::Process<ProcessImpl>::GetCS(ArrayViewE,
+                      ArrayViewPDG, ArrayViewMat, uint64_t, ArrayViewOut)
+                      const->bool [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<double>, t3::MultipleScatteringFS<true, double>>,
+                      ArrayViewE=t3::ArrayStructureMemberView<Particle<Floating
+                      Type>, lambda [](const Particle<FloatingType>
+                      &)->double>,
+                      ArrayViewPDG=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](const Particle<FloatingType>
+                      &)->t3::PDG_t>, ArrayViewMat=t3::MatID_t,
+                      ArrayViewOut=FloatingType *]" at line 696 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3DataHolder.h"
+            instantiation of "void
+                      dataholder::DataHolder<Floating>::Propagate() [with
+                      Floating=FloatingType]" at line 36 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/nbody.cpp"
+
+"/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fusion/T3Process.h",
+          line 108: warning: missing return statement at end of non-void
+          function "lambda []()->t3::PDG_t"
+      }();
+      ^
+          detected during:
+            instantiation of "auto t3::Process<ProcessImpl>::GetCS(ArrayViewE,
+                      ArrayViewPDG, ArrayViewMat, uint64_t, ArrayViewOut)
+                      const->bool [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<double>, t3::MultipleScatteringFS<true, double>>,
+                      ArrayViewE=t3::ArrayStructureMemberView<Particle<Floating
+                      Type>, lambda [](const Particle<FloatingType>
+                      &)->double>,
+                      ArrayViewPDG=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](const Particle<FloatingType>
+                      &)->t3::PDG_t>, ArrayViewMat=t3::MatID_t,
+                      ArrayViewOut=FloatingType *]" at line 696 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3DataHolder.h"
+            instantiation of "void
+                      dataholder::DataHolder<Floating>::Propagate() [with
+                      Floating=FloatingType]" at line 36 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/nbody.cpp"
+
+"/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fusion/T3Process.h",
+          line 115: warning: missing return statement at end of non-void
+          function "lambda []()->t3::MatID_t"
+      }();
+      ^
+          detected during:
+            instantiation of "auto t3::Process<ProcessImpl>::GetCS(ArrayViewE,
+                      ArrayViewPDG, ArrayViewMat, uint64_t, ArrayViewOut)
+                      const->bool [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<double>, t3::MultipleScatteringFS<true, double>>,
+                      ArrayViewE=t3::ArrayStructureMemberView<Particle<Floating
+                      Type>, lambda [](const Particle<FloatingType>
+                      &)->double>,
+                      ArrayViewPDG=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](const Particle<FloatingType>
+                      &)->t3::PDG_t>, ArrayViewMat=t3::MatID_t,
+                      ArrayViewOut=FloatingType *]" at line 696 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3DataHolder.h"
+            instantiation of "void
+                      dataholder::DataHolder<Floating>::Propagate() [with
+                      Floating=FloatingType]" at line 36 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/nbody.cpp"
+
+"/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fusion/T3MultipleScatte
+          ringCSImpl.h", line 33: warning: variable "c" was declared but never
+          referenced
+    auto const c=1.0;
+               ^
+          detected during:
+            instantiation of "Floating
+                      t3::MultipleScatteringCS<Floating>::GetCS(Floating,
+                      t3::PDG_t, t3::MatID_t) const [with Floating=double]" at
+                      line 116 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3Process.h"
+            instantiation of "auto t3::Process<ProcessImpl>::GetCS(ArrayViewE,
+                      ArrayViewPDG, ArrayViewMat, uint64_t, ArrayViewOut)
+                      const->bool [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<double>, t3::MultipleScatteringFS<true, double>>,
+                      ArrayViewE=t3::ArrayStructureMemberView<Particle<Floating
+                      Type>, lambda [](const Particle<FloatingType>
+                      &)->double>,
+                      ArrayViewPDG=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](const Particle<FloatingType>
+                      &)->t3::PDG_t>, ArrayViewMat=t3::MatID_t,
+                      ArrayViewOut=FloatingType *]" at line 696 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3DataHolder.h"
+            instantiation of "void
+                      dataholder::DataHolder<Floating>::Propagate() [with
+                      Floating=FloatingType]" at line 36 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/nbody.cpp"
+
+"/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fusion/T3DataHolder.h",
+          line 768: warning: variable "id" was declared but never referenced
+            const int id = particlei.id;
+                      ^
+          detected during instantiation of "void
+                    dataholder::DataHolder<Floating>::Propagate() [with
+                    Floating=FloatingType]" at line 36 of
+                    "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fus
+                    ion/nbody.cpp"
+
+"/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fusion/T3DataHolder.h",
+          line 679: warning: variable "csIsotropic" was declared but never
+          referenced
+    static std::array<Floating, Np> csIsotropic;
+                                    ^
+          detected during instantiation of "void
+                    dataholder::DataHolder<Floating>::Propagate() [with
+                    Floating=FloatingType]" at line 36 of
+                    "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fus
+                    ion/nbody.cpp"
+
+"/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fusion/T3DataHolder.h",
+          line 699: warning: variable "rho0" was declared but never referenced
+    constexpr Floating rho0 = 1.0;
+                       ^
+          detected during instantiation of "void
+                    dataholder::DataHolder<Floating>::Propagate() [with
+                    Floating=FloatingType]" at line 36 of
+                    "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fus
+                    ion/nbody.cpp"
+
+"/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fusion/T3DataHolder.h",
+          line 703: warning: variable "DE" was declared but never referenced
+    Floating DE=0.0;
+             ^
+          detected during instantiation of "void
+                    dataholder::DataHolder<Floating>::Propagate() [with
+                    Floating=FloatingType]" at line 36 of
+                    "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fus
+                    ion/nbody.cpp"
+
+"/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fusion/T3DataHolder.h",
+          line 531: warning: variable "prevLIFE" was declared but never
+          referenced
+    auto prevLIFE = LIFE;
+         ^
+
+"/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fusion/T3Process.h",
+          line 170: warning: missing return statement at end of non-void
+          function "lambda []()->t3::PDG_t"
+      }();
+      ^
+          detected during:
+            instantiation of "auto
+                      t3::Process<ProcessImpl>::GetFSImpl(ArrayViewP,
+                      ArrayViewPDG, ArrayViewMat, ArrayViewRng, uint64_t,
+                      TupleOfArrayViewsPDG &, TupleOfArrayViewsP &,
+                      std::index_sequence<Is...>) const->bool [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<double>, t3::MultipleScatteringFS<true, double>>,
+                      ArrayViewP=t3::ArrayStructureMemberView<Particle<Floating
+                      Type>, lambda [](const Particle<FloatingType>
+                      &)->t3::LorentzVector<FloatingType>>,
+                      ArrayViewPDG=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](const Particle<FloatingType>
+                      &)->t3::PDG_t>,
+                      ArrayViewMat=t3::ConstantView<t3::MatID_t>,
+                      ArrayViewRng=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](Particle<FloatingType> &)->RandGen &>,
+                      TupleOfArrayViewsPDG=const std::tuple<long *, long *>,
+                      TupleOfArrayViewsP=const
+                      std::tuple<t3::LorentzVector<FloatingType> *,
+                      t3::LorentzVector<FloatingType> *>, Is=<0UL, 1UL>]" at
+                      line 140
+            instantiation of "auto t3::Process<ProcessImpl>::GetFS(ArrayViewP,
+                      ArrayViewPDG, ArrayViewMat, ArrayViewRng, uint64_t,
+                      TupleOfArrayViewsPDG &, TupleOfArrayViewsP &) const->bool
+                      [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<double>, t3::MultipleScatteringFS<true, double>>,
+                      ArrayViewP=t3::ArrayStructureMemberView<Particle<Floating
+                      Type>, lambda [](const Particle<FloatingType>
+                      &)->t3::LorentzVector<FloatingType>>,
+                      ArrayViewPDG=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](const Particle<FloatingType>
+                      &)->t3::PDG_t>,
+                      ArrayViewMat=t3::ConstantView<t3::MatID_t>,
+                      ArrayViewRng=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](Particle<FloatingType> &)->RandGen &>,
+                      TupleOfArrayViewsPDG=const std::tuple<long *, long *>,
+                      TupleOfArrayViewsP=const
+                      std::tuple<t3::LorentzVector<FloatingType> *,
+                      t3::LorentzVector<FloatingType> *>]" at line 864 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3DataHolder.h"
+            instantiation of "void dataholder::DataHolder<Floating>::React()
+                      [with Floating=FloatingType]" at line 38 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/nbody.cpp"
+
+"/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fusion/T3Process.h",
+          line 177: warning: missing return statement at end of non-void
+          function "lambda []()->t3::MatID_t"
+      }();
+      ^
+          detected during:
+            instantiation of "auto
+                      t3::Process<ProcessImpl>::GetFSImpl(ArrayViewP,
+                      ArrayViewPDG, ArrayViewMat, ArrayViewRng, uint64_t,
+                      TupleOfArrayViewsPDG &, TupleOfArrayViewsP &,
+                      std::index_sequence<Is...>) const->bool [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<double>, t3::MultipleScatteringFS<true, double>>,
+                      ArrayViewP=t3::ArrayStructureMemberView<Particle<Floating
+                      Type>, lambda [](const Particle<FloatingType>
+                      &)->t3::LorentzVector<FloatingType>>,
+                      ArrayViewPDG=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](const Particle<FloatingType>
+                      &)->t3::PDG_t>,
+                      ArrayViewMat=t3::ConstantView<t3::MatID_t>,
+                      ArrayViewRng=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](Particle<FloatingType> &)->RandGen &>,
+                      TupleOfArrayViewsPDG=const std::tuple<long *, long *>,
+                      TupleOfArrayViewsP=const
+                      std::tuple<t3::LorentzVector<FloatingType> *,
+                      t3::LorentzVector<FloatingType> *>, Is=<0UL, 1UL>]" at
+                      line 140
+            instantiation of "auto t3::Process<ProcessImpl>::GetFS(ArrayViewP,
+                      ArrayViewPDG, ArrayViewMat, ArrayViewRng, uint64_t,
+                      TupleOfArrayViewsPDG &, TupleOfArrayViewsP &) const->bool
+                      [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<double>, t3::MultipleScatteringFS<true, double>>,
+                      ArrayViewP=t3::ArrayStructureMemberView<Particle<Floating
+                      Type>, lambda [](const Particle<FloatingType>
+                      &)->t3::LorentzVector<FloatingType>>,
+                      ArrayViewPDG=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](const Particle<FloatingType>
+                      &)->t3::PDG_t>,
+                      ArrayViewMat=t3::ConstantView<t3::MatID_t>,
+                      ArrayViewRng=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](Particle<FloatingType> &)->RandGen &>,
+                      TupleOfArrayViewsPDG=const std::tuple<long *, long *>,
+                      TupleOfArrayViewsP=const
+                      std::tuple<t3::LorentzVector<FloatingType> *,
+                      t3::LorentzVector<FloatingType> *>]" at line 864 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3DataHolder.h"
+            instantiation of "void dataholder::DataHolder<Floating>::React()
+                      [with Floating=FloatingType]" at line 38 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/nbody.cpp"
+
+"/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fusion/T3MultipleScatte
+          ringFSImpl.h", line 80: warning: variable "c" was declared but never
+          referenced
+    auto const c=1.0;
+               ^
+          detected during:
+            instantiation of "auto t3::ProcessImplFromCSandFS<CSImpl,
+                      FSImpl>::GetFS(Args &&...) const [with
+                      CSImpl=t3::MultipleScatteringCS<double>,
+                      FSImpl=t3::MultipleScatteringFS<true, double>,
+                      Args=<const t3::LorentzVector<FloatingType> &, const
+                      t3::PDG_t &, const t3::MatID_t &, RandGen &>]" at line
+                      180 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3Process.h"
+            instantiation of "auto
+                      t3::Process<ProcessImpl>::GetFSImpl(ArrayViewP,
+                      ArrayViewPDG, ArrayViewMat, ArrayViewRng, uint64_t,
+                      TupleOfArrayViewsPDG &, TupleOfArrayViewsP &,
+                      std::index_sequence<Is...>) const->bool [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<double>, t3::MultipleScatteringFS<true, double>>,
+                      ArrayViewP=t3::ArrayStructureMemberView<Particle<Floating
+                      Type>, lambda [](const Particle<FloatingType>
+                      &)->t3::LorentzVector<FloatingType>>,
+                      ArrayViewPDG=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](const Particle<FloatingType>
+                      &)->t3::PDG_t>,
+                      ArrayViewMat=t3::ConstantView<t3::MatID_t>,
+                      ArrayViewRng=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](Particle<FloatingType> &)->RandGen &>,
+                      TupleOfArrayViewsPDG=const std::tuple<long *, long *>,
+                      TupleOfArrayViewsP=const
+                      std::tuple<t3::LorentzVector<FloatingType> *,
+                      t3::LorentzVector<FloatingType> *>, Is=<0UL, 1UL>]" at
+                      line 140 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3Process.h"
+            instantiation of "auto t3::Process<ProcessImpl>::GetFS(ArrayViewP,
+                      ArrayViewPDG, ArrayViewMat, ArrayViewRng, uint64_t,
+                      TupleOfArrayViewsPDG &, TupleOfArrayViewsP &) const->bool
+                      [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<double>, t3::MultipleScatteringFS<true, double>>,
+                      ArrayViewP=t3::ArrayStructureMemberView<Particle<Floating
+                      Type>, lambda [](const Particle<FloatingType>
+                      &)->t3::LorentzVector<FloatingType>>,
+                      ArrayViewPDG=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](const Particle<FloatingType>
+                      &)->t3::PDG_t>,
+                      ArrayViewMat=t3::ConstantView<t3::MatID_t>,
+                      ArrayViewRng=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](Particle<FloatingType> &)->RandGen &>,
+                      TupleOfArrayViewsPDG=const std::tuple<long *, long *>,
+                      TupleOfArrayViewsP=const
+                      std::tuple<t3::LorentzVector<FloatingType> *,
+                      t3::LorentzVector<FloatingType> *>]" at line 864 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3DataHolder.h"
+            instantiation of "void dataholder::DataHolder<Floating>::React()
+                      [with Floating=FloatingType]" at line 38 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/nbody.cpp"
+
+"/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fusion/T3MultipleScatte
+          ringFSImpl.h", line 86: warning: variable "hc" was declared but never
+          referenced
+    auto const hc=200.0 * MeV * fm;
+               ^
+          detected during:
+            instantiation of "auto t3::ProcessImplFromCSandFS<CSImpl,
+                      FSImpl>::GetFS(Args &&...) const [with
+                      CSImpl=t3::MultipleScatteringCS<double>,
+                      FSImpl=t3::MultipleScatteringFS<true, double>,
+                      Args=<const t3::LorentzVector<FloatingType> &, const
+                      t3::PDG_t &, const t3::MatID_t &, RandGen &>]" at line
+                      180 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3Process.h"
+            instantiation of "auto
+                      t3::Process<ProcessImpl>::GetFSImpl(ArrayViewP,
+                      ArrayViewPDG, ArrayViewMat, ArrayViewRng, uint64_t,
+                      TupleOfArrayViewsPDG &, TupleOfArrayViewsP &,
+                      std::index_sequence<Is...>) const->bool [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<double>, t3::MultipleScatteringFS<true, double>>,
+                      ArrayViewP=t3::ArrayStructureMemberView<Particle<Floating
+                      Type>, lambda [](const Particle<FloatingType>
+                      &)->t3::LorentzVector<FloatingType>>,
+                      ArrayViewPDG=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](const Particle<FloatingType>
+                      &)->t3::PDG_t>,
+                      ArrayViewMat=t3::ConstantView<t3::MatID_t>,
+                      ArrayViewRng=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](Particle<FloatingType> &)->RandGen &>,
+                      TupleOfArrayViewsPDG=const std::tuple<long *, long *>,
+                      TupleOfArrayViewsP=const
+                      std::tuple<t3::LorentzVector<FloatingType> *,
+                      t3::LorentzVector<FloatingType> *>, Is=<0UL, 1UL>]" at
+                      line 140 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3Process.h"
+            instantiation of "auto t3::Process<ProcessImpl>::GetFS(ArrayViewP,
+                      ArrayViewPDG, ArrayViewMat, ArrayViewRng, uint64_t,
+                      TupleOfArrayViewsPDG &, TupleOfArrayViewsP &) const->bool
+                      [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<double>, t3::MultipleScatteringFS<true, double>>,
+                      ArrayViewP=t3::ArrayStructureMemberView<Particle<Floating
+                      Type>, lambda [](const Particle<FloatingType>
+                      &)->t3::LorentzVector<FloatingType>>,
+                      ArrayViewPDG=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](const Particle<FloatingType>
+                      &)->t3::PDG_t>,
+                      ArrayViewMat=t3::ConstantView<t3::MatID_t>,
+                      ArrayViewRng=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](Particle<FloatingType> &)->RandGen &>,
+                      TupleOfArrayViewsPDG=const std::tuple<long *, long *>,
+                      TupleOfArrayViewsP=const
+                      std::tuple<t3::LorentzVector<FloatingType> *,
+                      t3::LorentzVector<FloatingType> *>]" at line 864 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3DataHolder.h"
+            instantiation of "void dataholder::DataHolder<Floating>::React()
+                      [with Floating=FloatingType]" at line 38 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/nbody.cpp"
+
+"/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fusion/T3MultipleScatte
+          ringFSImpl.h", line 183: warning: missing return statement at end of
+          non-void function "t3::MultipleScatteringFS<generateRecoil,
+          Floating>::GetFS(const t3::LorentzVector<Floating> &, t3::PDG_t,
+          t3::MatID_t, RandomEngine &) const [with generateRecoil=true,
+          Floating=double, RandomEngine=RandGen]"
+    }
+    ^
+          detected during:
+            instantiation of "auto t3::MultipleScatteringFS<generateRecoil,
+                      Floating>::GetFS(const t3::LorentzVector<Floating> &,
+                      t3::PDG_t, t3::MatID_t, RandomEngine &) const [with
+                      generateRecoil=true, Floating=double,
+                      RandomEngine=RandGen]" at line 43 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3ProcessImplFromCSandFS.h"
+            instantiation of "auto t3::ProcessImplFromCSandFS<CSImpl,
+                      FSImpl>::GetFS(Args &&...) const [with
+                      CSImpl=t3::MultipleScatteringCS<double>,
+                      FSImpl=t3::MultipleScatteringFS<true, double>,
+                      Args=<const t3::LorentzVector<FloatingType> &, const
+                      t3::PDG_t &, const t3::MatID_t &, RandGen &>]" at line
+                      180 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3Process.h"
+            instantiation of "auto
+                      t3::Process<ProcessImpl>::GetFSImpl(ArrayViewP,
+                      ArrayViewPDG, ArrayViewMat, ArrayViewRng, uint64_t,
+                      TupleOfArrayViewsPDG &, TupleOfArrayViewsP &,
+                      std::index_sequence<Is...>) const->bool [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<double>, t3::MultipleScatteringFS<true, double>>,
+                      ArrayViewP=t3::ArrayStructureMemberView<Particle<Floating
+                      Type>, lambda [](const Particle<FloatingType>
+                      &)->t3::LorentzVector<FloatingType>>,
+                      ArrayViewPDG=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](const Particle<FloatingType>
+                      &)->t3::PDG_t>,
+                      ArrayViewMat=t3::ConstantView<t3::MatID_t>,
+                      ArrayViewRng=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](Particle<FloatingType> &)->RandGen &>,
+                      TupleOfArrayViewsPDG=const std::tuple<long *, long *>,
+                      TupleOfArrayViewsP=const
+                      std::tuple<t3::LorentzVector<FloatingType> *,
+                      t3::LorentzVector<FloatingType> *>, Is=<0UL, 1UL>]" at
+                      line 140 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3Process.h"
+            instantiation of "auto t3::Process<ProcessImpl>::GetFS(ArrayViewP,
+                      ArrayViewPDG, ArrayViewMat, ArrayViewRng, uint64_t,
+                      TupleOfArrayViewsPDG &, TupleOfArrayViewsP &) const->bool
+                      [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<double>, t3::MultipleScatteringFS<true, double>>,
+                      ArrayViewP=t3::ArrayStructureMemberView<Particle<Floating
+                      Type>, lambda [](const Particle<FloatingType>
+                      &)->t3::LorentzVector<FloatingType>>,
+                      ArrayViewPDG=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](const Particle<FloatingType>
+                      &)->t3::PDG_t>,
+                      ArrayViewMat=t3::ConstantView<t3::MatID_t>,
+                      ArrayViewRng=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](Particle<FloatingType> &)->RandGen &>,
+                      TupleOfArrayViewsPDG=const std::tuple<long *, long *>,
+                      TupleOfArrayViewsP=const
+                      std::tuple<t3::LorentzVector<FloatingType> *,
+                      t3::LorentzVector<FloatingType> *>]" at line 864 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3DataHolder.h"
+            instantiation of "void dataholder::DataHolder<Floating>::React()
+                      [with Floating=FloatingType]" at line 38 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/nbody.cpp"
+
+"/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fusion/T3MultipleScatte
+          ringFSImpl.h", line 69: warning: variable "Ede" was set but never
+          used
+    auto Ede=0.0;
+         ^
+          detected during:
+            instantiation of "auto t3::MultipleScatteringFS<generateRecoil,
+                      Floating>::GetFS(const t3::LorentzVector<Floating> &,
+                      t3::PDG_t, t3::MatID_t, RandomEngine &) const [with
+                      generateRecoil=true, Floating=double,
+                      RandomEngine=RandGen]" at line 43 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3ProcessImplFromCSandFS.h"
+            instantiation of "auto t3::ProcessImplFromCSandFS<CSImpl,
+                      FSImpl>::GetFS(Args &&...) const [with
+                      CSImpl=t3::MultipleScatteringCS<double>,
+                      FSImpl=t3::MultipleScatteringFS<true, double>,
+                      Args=<const t3::LorentzVector<FloatingType> &, const
+                      t3::PDG_t &, const t3::MatID_t &, RandGen &>]" at line
+                      180 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3Process.h"
+            instantiation of "auto
+                      t3::Process<ProcessImpl>::GetFSImpl(ArrayViewP,
+                      ArrayViewPDG, ArrayViewMat, ArrayViewRng, uint64_t,
+                      TupleOfArrayViewsPDG &, TupleOfArrayViewsP &,
+                      std::index_sequence<Is...>) const->bool [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<double>, t3::MultipleScatteringFS<true, double>>,
+                      ArrayViewP=t3::ArrayStructureMemberView<Particle<Floating
+                      Type>, lambda [](const Particle<FloatingType>
+                      &)->t3::LorentzVector<FloatingType>>,
+                      ArrayViewPDG=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](const Particle<FloatingType>
+                      &)->t3::PDG_t>,
+                      ArrayViewMat=t3::ConstantView<t3::MatID_t>,
+                      ArrayViewRng=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](Particle<FloatingType> &)->RandGen &>,
+                      TupleOfArrayViewsPDG=const std::tuple<long *, long *>,
+                      TupleOfArrayViewsP=const
+                      std::tuple<t3::LorentzVector<FloatingType> *,
+                      t3::LorentzVector<FloatingType> *>, Is=<0UL, 1UL>]" at
+                      line 140 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3Process.h"
+            instantiation of "auto t3::Process<ProcessImpl>::GetFS(ArrayViewP,
+                      ArrayViewPDG, ArrayViewMat, ArrayViewRng, uint64_t,
+                      TupleOfArrayViewsPDG &, TupleOfArrayViewsP &) const->bool
+                      [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<double>, t3::MultipleScatteringFS<true, double>>,
+                      ArrayViewP=t3::ArrayStructureMemberView<Particle<Floating
+                      Type>, lambda [](const Particle<FloatingType>
+                      &)->t3::LorentzVector<FloatingType>>,
+                      ArrayViewPDG=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](const Particle<FloatingType>
+                      &)->t3::PDG_t>,
+                      ArrayViewMat=t3::ConstantView<t3::MatID_t>,
+                      ArrayViewRng=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](Particle<FloatingType> &)->RandGen &>,
+                      TupleOfArrayViewsPDG=const std::tuple<long *, long *>,
+                      TupleOfArrayViewsP=const
+                      std::tuple<t3::LorentzVector<FloatingType> *,
+                      t3::LorentzVector<FloatingType> *>]" at line 864 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3DataHolder.h"
+            instantiation of "void dataholder::DataHolder<Floating>::React()
+                      [with Floating=FloatingType]" at line 38 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/nbody.cpp"
+
+"/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_fusion/T3MultipleScatte
+          ringFSImpl.h", line 177: warning: variable "de" was declared but
+          never referenced
+    auto const de=Elsfin1-Els1;
+               ^
+          detected during:
+            instantiation of "auto t3::MultipleScatteringFS<generateRecoil,
+                      Floating>::GetFS(const t3::LorentzVector<Floating> &,
+                      t3::PDG_t, t3::MatID_t, RandomEngine &) const [with
+                      generateRecoil=true, Floating=double,
+                      RandomEngine=RandGen]" at line 43 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3ProcessImplFromCSandFS.h"
+            instantiation of "auto t3::ProcessImplFromCSandFS<CSImpl,
+                      FSImpl>::GetFS(Args &&...) const [with
+                      CSImpl=t3::MultipleScatteringCS<double>,
+                      FSImpl=t3::MultipleScatteringFS<true, double>,
+                      Args=<const t3::LorentzVector<FloatingType> &, const
+                      t3::PDG_t &, const t3::MatID_t &, RandGen &>]" at line
+                      180 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3Process.h"
+            instantiation of "auto
+                      t3::Process<ProcessImpl>::GetFSImpl(ArrayViewP,
+                      ArrayViewPDG, ArrayViewMat, ArrayViewRng, uint64_t,
+                      TupleOfArrayViewsPDG &, TupleOfArrayViewsP &,
+                      std::index_sequence<Is...>) const->bool [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<double>, t3::MultipleScatteringFS<true, double>>,
+                      ArrayViewP=t3::ArrayStructureMemberView<Particle<Floating
+                      Type>, lambda [](const Particle<FloatingType>
+                      &)->t3::LorentzVector<FloatingType>>,
+                      ArrayViewPDG=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](const Particle<FloatingType>
+                      &)->t3::PDG_t>,
+                      ArrayViewMat=t3::ConstantView<t3::MatID_t>,
+                      ArrayViewRng=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](Particle<FloatingType> &)->RandGen &>,
+                      TupleOfArrayViewsPDG=const std::tuple<long *, long *>,
+                      TupleOfArrayViewsP=const
+                      std::tuple<t3::LorentzVector<FloatingType> *,
+                      t3::LorentzVector<FloatingType> *>, Is=<0UL, 1UL>]" at
+                      line 140 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3Process.h"
+            instantiation of "auto t3::Process<ProcessImpl>::GetFS(ArrayViewP,
+                      ArrayViewPDG, ArrayViewMat, ArrayViewRng, uint64_t,
+                      TupleOfArrayViewsPDG &, TupleOfArrayViewsP &) const->bool
+                      [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<double>, t3::MultipleScatteringFS<true, double>>,
+                      ArrayViewP=t3::ArrayStructureMemberView<Particle<Floating
+                      Type>, lambda [](const Particle<FloatingType>
+                      &)->t3::LorentzVector<FloatingType>>,
+                      ArrayViewPDG=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](const Particle<FloatingType>
+                      &)->t3::PDG_t>,
+                      ArrayViewMat=t3::ConstantView<t3::MatID_t>,
+                      ArrayViewRng=t3::ArrayStructureMemberView<Particle<Floati
+                      ngType>, lambda [](Particle<FloatingType> &)->RandGen &>,
+                      TupleOfArrayViewsPDG=const std::tuple<long *, long *>,
+                      TupleOfArrayViewsP=const
+                      std::tuple<t3::LorentzVector<FloatingType> *,
+                      t3::LorentzVector<FloatingType> *>]" at line 864 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/T3DataHolder.h"
+            instantiation of "void dataholder::DataHolder<Floating>::React()
+                      [with Floating=FloatingType]" at line 38 of
+                      "/home/70-gaa/NFbuild_script_CHECK_SMALL/source/neutron_f
+                      usion/nbody.cpp"
+
+/opt/pgi/linux86-64-llvm/19.4/share/llvm/bin/opt: /tmp/pgc++dIWbjNjlbeWs.ll:3943:13: error: '@__pgi_managed_delete' defined with type 'void (i8*, i64)*'
+        call void  @__pgi_managed_delete (i8* %4) nounwind, !dbg !1779
+                   ^
+CMakeFiles/Test.dir/build.make:88: recipe for target 'CMakeFiles/Test.dir/nbody.cpp.o' failed
+make[2]: *** [CMakeFiles/Test.dir/nbody.cpp.o] Error 2
+CMakeFiles/Makefile2:72: recipe for target 'CMakeFiles/Test.dir/all' failed
+make[1]: *** [CMakeFiles/Test.dir/all] Error 2
+Makefile:83: recipe for target 'all' failed
+make: *** [all] Error 2
