@@ -21,13 +21,6 @@ LorentzVector<T> operator*(const T a, const LorentzVector<T> & rhsvector);
 
 template <typename T>
 LorentzVector<T> operator*(const LorentzVector<T> & lhsvector, const T a);
-/*
-template <typename T>
-LorentzVector<T> operator*(const int a, const LorentzVector<T> & rhsvector);
-
-template <typename T>
-LorentzVector<T> operator*(const LorentzVector<T> & lhsvector, const int a);
-*/
 //***************************************************************//
 //These combinations of symbols may be reserved and used by the compiler.
 // __x __X _X (x, X - any symbol) - everywhere
@@ -45,7 +38,6 @@ private:
   T fx, fy, fz, fE;
 public:
 //contsructors:
-//\\//LorentzVector()=delete;
   LorentzVector():fx(0.0), fy(0.0), fz(0.0), fE(0.0){}
   LorentzVector(T x, T y, T z, T E):fx(x),fy(y),fz(z),fE(E){}
   LorentzVector(LorentzVector const & vector);
@@ -89,14 +81,9 @@ public:
   LorentzVector & operator-=(const LorentzVector & rhsvector);
   friend LorentzVector operator*<>(const T a, const LorentzVector<T> & rhsvector);
   friend LorentzVector operator*<>(const LorentzVector<T> & lhsvector, const T a);
-//friend LorentzVector operator*<>(const int a, const LorentzVector<T> & rhsvector);
-//friend LorentzVector operator*<>(const LorentzVector<T> & lhsvector, const int a);
   LorentzVector & operator*=(const T a);
-//LorentzVector & operator*=(const int a);
   LorentzVector operator/(const T a);
-//LorentzVector operator/(const int a);
   LorentzVector & operator/=(const T a);
-//LorentzVector & operator/=(const int a);
 };
 
 template <typename T>
@@ -154,64 +141,28 @@ LorentzVector<T> operator*(const LorentzVector<T> & lhsvector, const T a)
   LorentzVector<T> result(lhsvector.fx*a, lhsvector.fy*a, lhsvector.fz*a, lhsvector.fE*a);
   return result;
 }
-/*
-template <typename T>
-LorentzVector<T> operator*(const int a, const LorentzVector<T> & rhsvector)
-{
-  LorentzVector<T> result(rhsvector.fx*a, rhsvector.fy*a, rhsvector.fz*a, rhsvector.fE*a);
-  return result;
-}
-*/
-/*
-template <typename T>
-LorentzVector<T> operator*(const LorentzVector<T> & lhsvector, const int a)
-{
-  LorentzVector<T> result(lhsvector.fx*a, lhsvector.fy*a, lhsvector.fz*a, lhsvector.fE*a);
-  return result;
-}
-*/
+
 template <typename T>
 LorentzVector<T> & LorentzVector<T>::operator*=(const T a)
 {
   this->fx*=a, this->fy*=a, this->fz*=a, this->fE*=a;
   return *this;
 }
-/*
-template <typename T>
-LorentzVector<T> & LorentzVector<T>::operator*=(const int a)
-{
-  this->fx*=a, this->fy*=a, this->fz*=a, this->fE*=a;
-  return *this;
-}
-*/
+
 template <typename T>
 LorentzVector<T> LorentzVector<T>::operator/(const T a)
 {
   LorentzVector<T> result(this->fx/a, this->fy/a, this->fz/a, this->fE/a);
   return result;
 }
-/*
-template <typename T>
-LorentzVector<T> LorentzVector<T>::operator/(const int a)
-{
-  LorentzVector<T> result(this->fx/a,this->fy/a,this->fz/a,this->fE/a);
-  return result;
-}
-*/
+
 template <typename T>
 LorentzVector<T> & LorentzVector<T>::operator/=(const T a)
 {
   this->fx/=a, this->fy/=a, this->fz/=a, this->fE/=a;
   return *this;
 }
-/*
-template <typename T>
-LorentzVector<T> & LorentzVector<T>::operator/=(const int a)
-{
-  this->fx/=a, this->fy/=a, this->fz/=a, this->fE/=a;
-  return *this;
-}
-*/
+
 template <typename T>
 std::ostream& operator<<(std::ostream& os, const LorentzVector<T> & vector)
 {
@@ -219,6 +170,6 @@ std::ostream& operator<<(std::ostream& os, const LorentzVector<T> & vector)
   return os;
 }
 
-}
+}//end of namespace t3
 
 #endif  //T3LORENTZVECTOR

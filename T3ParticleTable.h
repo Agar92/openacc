@@ -19,16 +19,15 @@ public:
   auto GetZ(PDG_t aPDG) const;
   auto GetA(PDG_t aPDG) const;
   std::pair<uint64_t, uint64_t> GetZA(PDG_t aPDG) const;
-  static constexpr auto makePDGfromZandA(uint64_t, uint64_t);
+  PDG_t makePDGfromZandA(uint64_t, uint64_t) const;
 private:
-  static std::atomic<bool> wasInitialized;
-  static std::map<PDG_t, double> fMasses;
-  static auto constexpr photonMass = 0.0;
-  static auto constexpr electronMass = 0.511 * MeV;
-  static auto constexpr protonMass = 938.272 * MeV;
-  static auto constexpr neutronMass = 939.566 * MeV;
-  static auto constexpr aeMass = 931.494 * MeV;
-  static auto constexpr nucleusPDGStartAfter = t3::PDG_t(1000000000);
+  std::map<PDG_t, double> fMasses;
+  double photonMass = 0.0;
+  double electronMass = 0.511 * MeV;
+  double protonMass = 938.272 * MeV;
+  double neutronMass = 939.566 * MeV;
+  double aeMass = 931.494 * MeV;
+  double nucleusPDGStartAfter = t3::PDG_t(1000000000);
 };
 
 inline std::pair<uint64_t, uint64_t> ParticleTable::GetZA(PDG_t aPDG) const {
@@ -46,8 +45,8 @@ inline auto ParticleTable::GetZ(PDG_t aPDG) const { return GetZA(aPDG).first; }
 
 inline auto ParticleTable::GetA(PDG_t aPDG) const { return GetZA(aPDG).second; }
 
-inline constexpr auto ParticleTable::makePDGfromZandA(uint64_t protonNumber,
-                                                      uint64_t baryonNumber) {
+inline PDG_t ParticleTable::makePDGfromZandA(uint64_t protonNumber,
+                                                      uint64_t baryonNumber) const {
   return static_cast<PDG_t>(static_cast<int64_t>(
       1000000000u + 10000u * protonNumber + baryonNumber * 10u));
 }
@@ -75,7 +74,6 @@ inline auto ParticleTable::GetMass(PDG_t aPDG) const
   }
   return fMasses.at(aPDG);
 }
-
 } // namespace t3
 
 #endif // T3PARTICLETABLE_H

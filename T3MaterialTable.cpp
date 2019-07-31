@@ -5,28 +5,14 @@
 #include <iostream>
 
 namespace t3 {
-
-decltype(MaterialTable::fMaterials) MaterialTable::fMaterials{};
-decltype(MaterialTable::fFractions) MaterialTable::fFractions{};
-decltype(MaterialTable::fConcentrations) MaterialTable::fConcentrations{};
-decltype(MaterialTable::fDensities) MaterialTable::fDensities{};
-decltype(MaterialTable::wasInitialized) MaterialTable::wasInitialized{false};
-
 MaterialTable::MaterialTable() {
-  if (wasInitialized)
-    return;
-  else {
-    static std::mutex initializationMutex;
-    std::lock_guard<decltype(initializationMutex)> guard(initializationMutex);
-    if (wasInitialized)
-      return;
     fMaterials = {
-        std::vector<PDG_t>{PDG_t{1000010020}},                    // 0 deuterium
-        std::vector<PDG_t>{PDG_t{1000220480}},                    // 1 22Ti48
-        std::vector<PDG_t>{PDG_t{1000010020}, PDG_t{1000220480}}, // 2 TiD_2
-        std::vector<PDG_t>{PDG_t{1000040090}},                    // 3 4Be9
+        std::vector<PDG_t>{PDG_t{1000010020}},
+        std::vector<PDG_t>{PDG_t{1000220480}},
+        std::vector<PDG_t>{PDG_t{1000010020}, PDG_t{1000220480}},
+        std::vector<PDG_t>{PDG_t{1000040090}},
         std::vector<PDG_t>{PDG_t{1000922350},
-                          PDG_t{1000922380}}}; // 4//mix of U235 and U238.
+                          PDG_t{1000922380}}};
     fFractions = {std::vector<double>{1.}, std::vector<double>{1.},
                   std::vector<double>{2. / 3., 1 - 2. / 3.},
                   std::vector<double>{1.},
@@ -43,7 +29,5 @@ MaterialTable::MaterialTable() {
       }
       fConcentrations.at(i) = fDensities.at(i) / Atot;
     }
-    wasInitialized=true;
-  }
 }
 } // namespace t3

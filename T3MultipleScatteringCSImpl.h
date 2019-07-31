@@ -18,18 +18,18 @@ public:
           PDG_t targetPDG) const;
   inline Floating
   GetCS(Floating e, PDG_t,
-        MatID_t matID) const; 
-  static auto constexpr Edisplace_deuteron = 10 * eV;
-  static auto constexpr Edisplace_titan    = 25 * eV;
+        MatID_t matID) const;
   ParticleTable aParticleTable;
+  MaterialTable aMaterialTable;
 };
 template <typename Floating>
 Floating MultipleScatteringCS<Floating>::GetCS(Floating e,
                                                PDG_t incPDG, PDG_t targetPDG) const {
-  //\\//static const auto aParticleTable = ParticleTable();
+  auto const Edisplace_deuteron = 10 * eV;
+  auto const Edisplace_titan    = 25 * eV;
   if (incPDG == PDG_t(22) || incPDG == PDG_t(2112)) return 0.;
-  static const auto deuteronPDG = aParticleTable.makePDGfromZandA(1, 2);
-  static const auto titanPDG    = aParticleTable.makePDGfromZandA(22, 48);
+  auto const deuteronPDG = aParticleTable.makePDGfromZandA(1, 2);
+  auto const titanPDG    = aParticleTable.makePDGfromZandA(22, 48);
   auto const c=1.0;
   auto const alpha=1.0/137;
   auto const ec=std::sqrt(alpha);
@@ -37,18 +37,10 @@ Floating MultipleScatteringCS<Floating>::GetCS(Floating e,
   auto const h=1.0;
   auto const a0=h*h/me/ec/ec;
   auto const CTF=1.0/2.0*std::pow(3*M_PI/4,2.0/3.0);
-
-  if(incPDG==PDG_t(0) || targetPDG==PDG_t(0))
-  {
-    std::cout<<"***Error in MultipleScatteringCS: incPDG="<<incPDG<<" targetPDG="<<targetPDG<<std::endl;
-    exit(0);
-  }
-
   auto const m=aParticleTable.GetMass(incPDG);
   auto const M=aParticleTable.GetMass(targetPDG);
   auto const z=aParticleTable.GetZ(incPDG);
   auto const Z=aParticleTable.GetZ(targetPDG);
-
   auto const Elsinc=m+e;
   auto const s=m*m+2*Elsinc*M+M*M;
   auto const mr=m*M/std::sqrt(s);
@@ -78,31 +70,28 @@ Floating MultipleScatteringCS<Floating>::GetCS(Floating e,
   auto const ASC=tmax/AS/ASC1;
   auto const hc=200.0 * MeV * fm;
   auto cs=ca*ASC*hc*hc;
-
-  if(incPDG == targetPDG) cs *= 1.0/*2.0*/;
+  if(incPDG == targetPDG) cs *= 1.0;
   return cs;
 }
 
 template <typename Floating>
 Floating MultipleScatteringCS<Floating>::GetCS(Floating e,
                                                PDG_t incPDG, MatID_t matID) const {
-  static const auto aMaterialTable = MaterialTable();
-   if (incPDG == PDG_t(22) || incPDG == PDG_t(2112)) return 0.;
-  t3::vector<Floating> csIsotope;
+  if (incPDG == PDG_t(22) || incPDG == PDG_t(2112)) return 0.;
   size_t const numi = aMaterialTable.GetNumberOfIsotopes(matID);
-  csIsotope.resize(numi);
+  Floating csIsotope[numi];
   for(size_t i=0; i<numi; ++i)
   {
-    csIsotope.at(i) = GetCS(e,incPDG,aMaterialTable.GetIsotopes(matID).at(i));
+    csIsotope[i] = GetCS(e,incPDG,aMaterialTable.GetIsotopes(matID)[i]);
   }
   auto cs=0.0;
   for(size_t i=0; i<numi; ++i)
   {
-    cs += aMaterialTable.GetFractions(matID).at(i)*csIsotope.at(i);
+    cs += aMaterialTable.GetFractions(matID)[i]*csIsotope[i];
   }
   return cs;
 }
-
+  
 } // namespace t3
 
 #endif // T3MULTIPLESCATTERINGCSIMPL_H

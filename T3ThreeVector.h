@@ -20,15 +20,7 @@ ThreeVector<T> operator*(const T a, ThreeVector<T> const & rhsside);
 
 template <typename T>
 ThreeVector<T> operator*(ThreeVector<T> const & lhsside, const T a);
-/*
-template <typename T>
-ThreeVector<T> operator*(const int a, ThreeVector<T> const & rhsside);
-
-template <typename T>
-ThreeVector<T> operator*(ThreeVector<T> const & lhsside, const int a);
-*/
-//***************************************************************//
-
+  
 template <typename T>
 class ThreeVector
 {
@@ -36,7 +28,6 @@ private:
   T fx, fy, fz;
 public:
 //contsructors:
-//\\//ThreeVector()=delete;
   ThreeVector():fx(0.0), fy(0.0), fz(0.0){}
   ThreeVector(T x, T y, T z):fx(x),fy(y),fz(z){}
   ThreeVector(ThreeVector const & vector);
@@ -67,14 +58,9 @@ public:
   ThreeVector & operator-=(const ThreeVector & rhsvector);
   friend ThreeVector operator*<>(const T a, ThreeVector const & rhsside);
   friend ThreeVector operator*<>(ThreeVector const & lhsside, const T a);
-//friend ThreeVector operator*<>(const int a, ThreeVector const & rhsside);
-//friend ThreeVector operator*<>(ThreeVector const & lhsside, const int a);
   ThreeVector & operator*=(const T a);
-//ThreeVector & operator*=(const int a);
   ThreeVector operator/(const T a);
-//ThreeVector operator/(const int a);
   ThreeVector & operator/=(const T a);
-//ThreeVector & operator/=(const int a);
 };
 
 template <typename T>
@@ -132,63 +118,28 @@ ThreeVector<T> operator*(ThreeVector<T> const & lhsside, const T a)
   ThreeVector<T> result(lhsside.fx*a, lhsside.fy*a, lhsside.fz*a);
   return result;
 }
-/*
-template <typename T>
-ThreeVector<T> operator*(const int a, ThreeVector<T> const & rhsside)
-{
-  ThreeVector<T> result(rhsside.fx*a, rhsside.fy*a, rhsside.fz*a);
-  return result;
-}
 
-template <typename T>
-ThreeVector<T> operator*(ThreeVector<T> const & lhsside, const int a)
-{
-  ThreeVector<T> result(lhsside.fx*a, lhsside.fy*a, lhsside.fz*a);
-  return result;
-}
-*/
 template <typename T>
 ThreeVector<T> & ThreeVector<T>::operator*=(const T a)
 {
   this->fx*=a, this->fy*=a, this->fz*=a;
   return *this;
 }
-/*
-template <typename T>
-ThreeVector<T> & ThreeVector<T>::operator*=(const int a)
-{
-  this->fx*=a, this->fy*=a, this->fz*=a;
-  return *this;
-}
-*/
+
 template <typename T>
 ThreeVector<T> ThreeVector<T>::operator/(const T a)
 {
   ThreeVector<T> result(this->fx/a, this->fy/a, this->fz/a);
   return result;
 }
-/*
-template <typename T>
-ThreeVector<T> ThreeVector<T>::operator/(const int a)
-{
-  ThreeVector<T> result(this->fx/a, this->fy/a, this->fz/a);
-  return result;
-}
-*/
+
 template <typename T>
 ThreeVector<T> & ThreeVector<T>::operator/=(const T a)
 {
   this->fx/=a, this->fy/=a, this->fz/=a;
   return *this;
 }
-/*
-template <typename T>
-ThreeVector<T> & ThreeVector<T>::operator/=(const int a)
-{
-  this->fx/=a, this->fy/=a, this->fz/=a;
-  return *this;
-}
-*/
+
 template <typename T>
 std::ostream& operator<<(std::ostream& os, const ThreeVector<T> & vector)
 {

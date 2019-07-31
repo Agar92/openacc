@@ -37,46 +37,38 @@ auto MultipleScatteringFS<generateRecoil, Floating>::GetFS(
     if constexpr (!generateRecoil) return std::make_tuple(PDG_t(0), LorentzVector<Floating>(0.0,0.0,0.0,0.0));
     else return std::make_tuple(PDG_t(0), PDG_t(0), LorentzVector<Floating>(0.0,0.0,0.0,0.0), LorentzVector<Floating>(0.0,0.0,0.0,0.0));
   }
-  //\\//static const auto aParticleTable = ParticleTable();
-  //\\//static const auto aMaterialTable = MaterialTable();
+  auto const Edisplace_deuteron = 10 * eV;
+  auto const Edisplace_titan    = 25 * eV;
   const PDG_t deuteronPDG = aParticleTable.makePDGfromZandA(1, 2);
   const PDG_t titanPDG    = aParticleTable.makePDGfromZandA(22, 48);
   auto const elsfull=p.energy();
   auto const m=p.mass();
-
   auto const Tls=elsfull-m;
   auto const numi = aMaterialTable.GetNumberOfIsotopes(matID);
-  t3::vector<Floating> csBorder;
+  //Floating csBorder[numi+1];
+  std::vector<Floating>  csBorder;
   csBorder.resize(numi+1);
   auto sigma_average = 0.0;
   csBorder.at(0) = 0.0;
   for(size_t i=0; i<numi; ++i)
   {
-    sigma_average += aMaterialTable.GetFractions(matID).at(i)
-            * aCS.GetCS(Tls, incPDG, aMaterialTable.GetIsotopes(matID).at(i));
-    csBorder.at(i+1) = sigma_average;
+    sigma_average += aMaterialTable.GetFractions(matID)[i]
+            * aCS.GetCS(Tls, incPDG, aMaterialTable.GetIsotopes(matID)[i]);
+    csBorder[i+1] = sigma_average;
   }
   auto const aR = generateSubCanonical();
   auto const raR = aR * sigma_average;
   PDG_t isotopePDG=PDG_t(-1);
   for(size_t i=0; i<numi; ++i)
   {
-    if(csBorder.at(numi-1-i)<raR && raR<=csBorder.at(numi-i))
-        isotopePDG = aMaterialTable.GetIsotopes(matID).at(numi-1-i);
+    if(csBorder[numi-1-i]<raR && raR<=csBorder[numi-i])
+        isotopePDG = aMaterialTable.GetIsotopes(matID)[numi-1-i];
   }
   auto tmin=0.0;
   Floating const M=aParticleTable.GetMass(isotopePDG);
   auto Ede=0.0;
-  if(isotopePDG == deuteronPDG)
-  {
-    Ede=MultipleScatteringCS<Floating>::Edisplace_deuteron;
-    tmin=2 * MultipleScatteringCS<Floating>::Edisplace_deuteron * M;
-  }
-  else if(isotopePDG == titanPDG)
-  {
-    Ede=MultipleScatteringCS<Floating>::Edisplace_titan;
-    tmin=2 * MultipleScatteringCS<Floating>::Edisplace_titan * M;
-  }
+  if(isotopePDG == deuteronPDG)   tmin=2 * Edisplace_deuteron * M;
+  else if(isotopePDG == titanPDG) tmin=2 * Edisplace_titan * M;
   auto const c=1.0;
   auto const alpha=1.0/137;
   auto const ec=std::sqrt(alpha);
@@ -176,10 +168,9 @@ auto MultipleScatteringFS<generateRecoil, Floating>::GetFS(
   auto const Els1=p.E();
   auto const de=Elsfin1-Els1;
   if constexpr (!generateRecoil)
-          return std::make_tuple(std::move(outPDGinc), std::move(outPinc));
+          return std::make_tuple(outPDGinc, outPinc);
   else
-          return std::make_tuple(std::move(outPDGinc), std::move(outPDGtarget), std::move(outPinc), std::move(outPtarget));
-
+          return std::make_tuple(outPDGinc, outPDGtarget, outPinc, outPtarget);
   }
 }// namespace t3
 

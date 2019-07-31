@@ -25,11 +25,7 @@ constexpr auto PI = 3.14159265358979323846;
 constexpr auto TWOPI = PI * 2;
 
 namespace units {
-//---------------------------//
-//Units:
-//---------------------------//
 //energy is measured in MeV's:
-   
 constexpr double MeV = 1.0;         // 1 MeV = 1.0e6 eV;
 constexpr double keV = 1.0e-3 * MeV;// 1 keV = 1.0e3 eV;
 constexpr double eV  = 1.0e-6 * MeV;// 1 eV
