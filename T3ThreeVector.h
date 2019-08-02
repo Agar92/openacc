@@ -16,10 +16,10 @@ template <typename T>
 class ThreeVector;
 
 template <typename T>
-ThreeVector<T> operator*(const T a, ThreeVector<T> const & rhsside);
+ThreeVector<T> operator*(const T a, ThreeVector<T> const rhsside);
 
 template <typename T>
-ThreeVector<T> operator*(ThreeVector<T> const & lhsside, const T a);
+ThreeVector<T> operator*(ThreeVector<T> const lhsside, const T a);
   
 template <typename T>
 class ThreeVector
@@ -40,11 +40,11 @@ public:
   T z() const {return fz;}  
   T R() const {return std::sqrt(fx*fx+fy*fy+fz*fz);}
 //normalizes 3-vector:
-  ThreeVector<T> &  Unit()
+  ThreeVector<T>  Unit()
   {
     const T vector_length=std::sqrt(fx*fx+fy*fy+fz*fz);
-    this->fx/=vector_length, this->fy/=vector_length, this->fz/=vector_length;
-    return *this;
+    ThreeVector<T> result(this->fx/vector_length, this->fy/vector_length, this->fz/vector_length);
+    return result;
   }
 //setters:
   void SetX(T X){fx=X;}
@@ -52,15 +52,15 @@ public:
   void SetZ(T Z){fz=Z;}
 //operator overloading:  
   ThreeVector & operator=(ThreeVector const & rhsvector);
-  ThreeVector operator+(ThreeVector const & rhsvector);
-  ThreeVector operator-(ThreeVector const & rhsvector);
-  ThreeVector & operator+=(const ThreeVector & rhsvector);
-  ThreeVector & operator-=(const ThreeVector & rhsvector);
-  friend ThreeVector operator*<>(const T a, ThreeVector const & rhsside);
-  friend ThreeVector operator*<>(ThreeVector const & lhsside, const T a);
-  ThreeVector & operator*=(const T a);
+  ThreeVector operator+(ThreeVector const rhsvector);
+  ThreeVector operator-(ThreeVector const rhsvector);
+  ThreeVector operator+=(const ThreeVector rhsvector);
+  ThreeVector operator-=(const ThreeVector rhsvector);
+  friend ThreeVector operator*<>(const T a, ThreeVector const rhsside);
+  friend ThreeVector operator*<>(ThreeVector const lhsside, const T a);
+  ThreeVector operator*=(const T a);
   ThreeVector operator/(const T a);
-  ThreeVector & operator/=(const T a);
+  ThreeVector operator/=(const T a);
 };
 
 template <typename T>
@@ -78,52 +78,52 @@ ThreeVector<T> & ThreeVector<T>::operator=(const ThreeVector & rhsvector)
 }
 
 template <typename T>
-ThreeVector<T> ThreeVector<T>::operator+(ThreeVector const & rhsvector)
+ThreeVector<T> ThreeVector<T>::operator+(ThreeVector const rhsvector)
 {
   ThreeVector<T> result(this->fx+rhsvector.fx,this->fy+rhsvector.fy,this->fz+rhsvector.fz);
   return result;
 }
 
 template <typename T>
-ThreeVector<T> ThreeVector<T>::operator-(ThreeVector const & rhsvector)
+ThreeVector<T> ThreeVector<T>::operator-(ThreeVector const rhsvector)
 {
   ThreeVector<T> result(this->fx-rhsvector.fx,this->fy-rhsvector.fy,this->fz-rhsvector.fz);
   return result;
 }
 
 template <typename T>
-ThreeVector<T> & ThreeVector<T>::operator+=(ThreeVector const & rhsvector)
+ThreeVector<T> ThreeVector<T>::operator+=(ThreeVector const rhsvector)
 {
-  this->fx+=rhsvector.fx, this->fy+=rhsvector.fy, this->fz+=rhsvector.fz;
-  return *this;
+  ThreeVector<Floating> result(this->fx+rhsvector.fx, this->fy+rhsvector.fy, this->fz+rhsvector.fz);
+  return result;
 }
 
 template <typename T>
-ThreeVector<T> & ThreeVector<T>::operator-=(ThreeVector const & rhsvector)
+ThreeVector<T> ThreeVector<T>::operator-=(ThreeVector const rhsvector)
 {
-  this->fx-=rhsvector.fx, this->fy-=rhsvector.fy, this->fz-=rhsvector.fz;
-  return *this;
+  ThreeVector<T> result(this->fx-rhsvector.fx, this->fy-rhsvector.fy, this->fz-rhsvector.fz);
+  return result;
 }
 
 template <typename T>
-ThreeVector<T> operator*(const T a, ThreeVector<T> const & rhsside)
+ThreeVector<T> operator*(const T a, ThreeVector<T> const rhsside)
 {
   ThreeVector<T> result(rhsside.fx*a, rhsside.fy*a, rhsside.fz*a);
   return result;
 }
 
 template <typename T>
-ThreeVector<T> operator*(ThreeVector<T> const & lhsside, const T a)
+ThreeVector<T> operator*(ThreeVector<T> const lhsside, const T a)
 {
   ThreeVector<T> result(lhsside.fx*a, lhsside.fy*a, lhsside.fz*a);
   return result;
 }
 
 template <typename T>
-ThreeVector<T> & ThreeVector<T>::operator*=(const T a)
+ThreeVector<T> ThreeVector<T>::operator*=(const T a)
 {
-  this->fx*=a, this->fy*=a, this->fz*=a;
-  return *this;
+  ThreeVector<T> result(this->fx*a, this->fy*a, this->fz*a);
+  return result;
 }
 
 template <typename T>
@@ -134,10 +134,10 @@ ThreeVector<T> ThreeVector<T>::operator/(const T a)
 }
 
 template <typename T>
-ThreeVector<T> & ThreeVector<T>::operator/=(const T a)
+ThreeVector<T> ThreeVector<T>::operator/=(const T a)
 {
-  this->fx/=a, this->fy/=a, this->fz/=a;
-  return *this;
+  ThreeVector<T> result(this->fx=a, this->fy=a, this->fz=a);
+  return result;
 }
 
 template <typename T>

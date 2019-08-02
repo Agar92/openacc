@@ -4,6 +4,7 @@
 #define T3LORENTZVECTOR_H
 
 #include <cmath>
+#include "T3Defs.h"
 #include "T3ThreeVector.h"
 
 namespace t3
@@ -17,10 +18,10 @@ template <typename T>
 class LorentzVector;
 
 template <typename T>
-LorentzVector<T> operator*(const T a, const LorentzVector<T> & rhsvector);
+LorentzVector<T> operator*(const T a, const LorentzVector<T> rhsvector);
 
 template <typename T>
-LorentzVector<T> operator*(const LorentzVector<T> & lhsvector, const T a);
+LorentzVector<T> operator*(const LorentzVector<T> lhsvector, const T a);
 //***************************************************************//
 //These combinations of symbols may be reserved and used by the compiler.
 // __x __X _X (x, X - any symbol) - everywhere
@@ -75,15 +76,15 @@ public:
   }
 //operator overloading:  
   LorentzVector & operator=(const LorentzVector & rhsvector);
-  LorentzVector operator+(const LorentzVector & rhsvector);
-  LorentzVector operator-(const LorentzVector & rhsvector);
-  LorentzVector & operator+=(const LorentzVector & rhsvector);
-  LorentzVector & operator-=(const LorentzVector & rhsvector);
-  friend LorentzVector operator*<>(const T a, const LorentzVector<T> & rhsvector);
-  friend LorentzVector operator*<>(const LorentzVector<T> & lhsvector, const T a);
-  LorentzVector & operator*=(const T a);
+  LorentzVector operator+(const LorentzVector rhsvector);
+  LorentzVector operator-(const LorentzVector rhsvector);
+  LorentzVector operator+=(const LorentzVector rhsvector);
+  LorentzVector operator-=(const LorentzVector rhsvector);
+  friend LorentzVector operator*<>(const T a, const LorentzVector<T> rhsvector);
+  friend LorentzVector operator*<>(const LorentzVector<T> lhsvector, const T a);
+  LorentzVector operator*=(const T a);
   LorentzVector operator/(const T a);
-  LorentzVector & operator/=(const T a);
+  LorentzVector operator/=(const T a);
 };
 
 template <typename T>
@@ -101,52 +102,52 @@ LorentzVector<T> & LorentzVector<T>::operator=(const LorentzVector & rhsvector)
 }
 
 template <typename T>
-LorentzVector<T> LorentzVector<T>::operator+(LorentzVector const & rhsvector)
+LorentzVector<T> LorentzVector<T>::operator+(LorentzVector const rhsvector)
 {
   LorentzVector<T> result(this->fx+rhsvector.fx,this->fy+rhsvector.fy,this->fz+rhsvector.fz,this->fE+rhsvector.fE);
   return result;
 }
 
 template <typename T>
-LorentzVector<T> LorentzVector<T>::operator-(LorentzVector const & rhsvector)
+LorentzVector<T> LorentzVector<T>::operator-(LorentzVector const rhsvector)
 {
   LorentzVector<T> result(this->fx-rhsvector.fx,this->fy-rhsvector.fy,this->fz-rhsvector.fz,this->fE-rhsvector.fE);
   return result;
 }
 
 template <typename T>
-LorentzVector<T> & LorentzVector<T>::operator+=(LorentzVector const & rhsvector)
+LorentzVector<T> LorentzVector<T>::operator+=(LorentzVector const rhsvector)
 {
-  this->fx+=rhsvector.fx, this->fy+=rhsvector.fy, this->fz+=rhsvector.fz,this->fE+=rhsvector.fE;
-  return *this;
+  LorentzVector<T> result(this->fx+rhsvector.fx, this->fy+rhsvector.fy, this->fz+rhsvector.fz, this->fE+rhsvector.fE);
+  return result;
 }
 
 template <typename T>
-LorentzVector<T> & LorentzVector<T>::operator-=(LorentzVector const & rhsvector)
+LorentzVector<T> LorentzVector<T>::operator-=(LorentzVector const rhsvector)
 {
-  this->fx-=rhsvector.fx, this->fy-=rhsvector.fy, this->fz-=rhsvector.fz,this->fE-=rhsvector.fE;
-  return *this;
+  LorentzVector<T> result(this->fx-rhsvector.fx, this->fy-rhsvector.fy, this->fz-rhsvector.fz, this->fE-rhsvector.fE);
+  return result;
 }
 
 template <typename T>
-LorentzVector<T> operator*(const T a, const LorentzVector<T> & rhsvector)
+LorentzVector<T> operator*(const T a, const LorentzVector<T> rhsvector)
 {
   LorentzVector<T> result(rhsvector.fx*a, rhsvector.fy*a, rhsvector.fz*a, rhsvector.fE*a);
   return result;
 }
 
 template <typename T>
-LorentzVector<T> operator*(const LorentzVector<T> & lhsvector, const T a)
+LorentzVector<T> operator*(const LorentzVector<T> lhsvector, const T a)
 {
   LorentzVector<T> result(lhsvector.fx*a, lhsvector.fy*a, lhsvector.fz*a, lhsvector.fE*a);
   return result;
 }
 
 template <typename T>
-LorentzVector<T> & LorentzVector<T>::operator*=(const T a)
+LorentzVector<T> LorentzVector<T>::operator*=(const T a)
 {
-  this->fx*=a, this->fy*=a, this->fz*=a, this->fE*=a;
-  return *this;
+  LorentzVector<T> result(this->fx*a, this->fy*a, this->fz*a, this->fE*a);
+  return result;
 }
 
 template <typename T>
@@ -157,10 +158,10 @@ LorentzVector<T> LorentzVector<T>::operator/(const T a)
 }
 
 template <typename T>
-LorentzVector<T> & LorentzVector<T>::operator/=(const T a)
+LorentzVector<T> LorentzVector<T>::operator/=(const T a)
 {
-  this->fx/=a, this->fy/=a, this->fz/=a, this->fE/=a;
-  return *this;
+  LorentzVector<T> result(this->fx/a, this->fy/a, this->fz/a, this->fE/a);
+  return result;
 }
 
 template <typename T>
@@ -169,6 +170,27 @@ std::ostream& operator<<(std::ostream& os, const LorentzVector<T> & vector)
   os<<vector.x()<<" "<<vector.y()<<" "<<vector.z()<<" "<<vector.E()<<" ";
   return os;
 }
+//declaration of structures instead of std::make_tuple()
+template <typename Floating>
+struct Pair
+{
+  Pair()=delete;
+  Pair(PDG_t _pdg, LorentzVector<Floating> _P):pdg1(_pdg),P1(_P){}
+  PDG_t pdg1;
+  LorentzVector<Floating> P1;
+};
+
+template <typename Floating>
+struct Four
+{
+  Four()=delete;
+  Four(PDG_t _pdg1, PDG_t _pdg2, LorentzVector<Floating> _P1,
+       LorentzVector<Floating> _P2):pdg1(_pdg1),pdg2(_pdg2),P1(_P1),P2(_P2){}
+  PDG_t pdg1;
+  PDG_t pdg2;
+  LorentzVector<Floating> P1;
+  LorentzVector<Floating> P2;
+};
 
 }//end of namespace t3
 

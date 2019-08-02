@@ -3,7 +3,6 @@
 #define T3DEFS_H
 
 #include <cstdint>
-#include <vector>
 
 //**********************************************************************************//
 //Here i create the flag, which defines where we work:                              //
@@ -15,10 +14,10 @@
 
 namespace t3 {
 
+using FloatingType = double;
+  
 typedef int64_t PDG_t;
 typedef uint64_t MatID_t;
-
-template <typename T> using vector = std::vector<T>;
 
 // TODO calculate with needed precision at compile time
 constexpr auto PI = 3.14159265358979323846;
@@ -77,6 +76,43 @@ constexpr double gcm3 = gr / cm3;
 //r - mm=1.0. cm=10.0 * mm. m=1000.0*mm. nm, fm
 //E - MeV eV=1.0e-6 * eV.
 //t - nanoseconds. 1s=10^9ns.
+
+constexpr double TLS=10.0*MeV;
+constexpr bool report = true;
+constexpr bool reportTimes = false;
+constexpr bool histogram = true;
+constexpr long int G = 27;
+constexpr int N = 9999;
+constexpr int Np = N+1;
+constexpr int INJ = 1000;
+constexpr long int K = N+1;
+constexpr unsigned int max_loop = 10;
+constexpr int cuba = 16;
+constexpr unsigned int Nbin = 8;
+constexpr int DN = (N+1) / Nbin +1;
+constexpr unsigned int BLt = 200000000 / Nbin;
+constexpr unsigned int GL1 = BLt - 1;
+constexpr double cgam = 5.0;
+constexpr auto dcgam = cgam + cgam;
+constexpr int cubn = cuba + cuba;
+constexpr int cub2 = cubn * cubn;
+constexpr int cub3 = cub2 * cubn;
+constexpr double fuse = .25;
+
+}
+
+constexpr FloatingType ag = 1.0e-5 * units::cm;//the width of the cell in cm
+
+//From T3Util.h:
+template <typename Floating, typename RandomEngine>
+auto GenerateSubCanonical(RandomEngine &engine) {
+  auto const randomNumber = engine();
+  auto maxRandomNumber = engine.max();
+  auto maxRandomNumberAsFloating =
+      static_cast<Floating>(maxRandomNumber);
+  auto const result =
+      static_cast<Floating>(randomNumber) / maxRandomNumberAsFloating;
+  return result;
 }
 
 } // namespace t3

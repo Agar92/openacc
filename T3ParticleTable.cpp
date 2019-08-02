@@ -1,5 +1,4 @@
 #include "T3ParticleTable.h"
-#include <mutex>
 
 namespace t3 {
 ParticleTable::ParticleTable() {

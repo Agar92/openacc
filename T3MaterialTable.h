@@ -2,28 +2,33 @@
 #ifndef T3MATERIALTABLE_H
 #define T3MATERIALTABLE_H
 
-#include <atomic>
 #include <utility>
-#include <vector>
-
 #include "T3Defs.h"
 
 namespace t3 {
+//WE HAVE 5 MATERIALS NOW:
+constexpr int NumberOfMaterials=5;
+//MAX NUMBER OF ISOTOPES=2:
+constexpr int MaxNumberOfIsotopes=2;
+constexpr int csBorderSTEP=MaxNumberOfIsotopes+1;
 
 class MaterialTable {
 public:
   MaterialTable();
-  auto const GetIsotopes(MatID_t matID) const  { return fMaterials.at(matID); }
-  auto GetFractions(MatID_t matID) const { return fFractions.at(matID); }
-  auto GetConcentrations(MatID_t matID) const { return fConcentrations.at(matID); }
-  auto GetDensity(MatID_t matID) const { return fDensities.at(matID); }
-  auto GetNumberOfIsotopes(MatID_t matID) const { return fMaterials.at(matID).size(); }
-  auto GetNMat() const { return fMaterials.size(); }
+  auto const GetIsotopes(MatID_t matID, int i) const  { return fMaterials[matID][i]; }
+  auto GetFractions(MatID_t matID, int i) const { return fFractions[matID][i]; }
+  auto GetConcentrations(MatID_t matID) const { return fConcentrations[matID]; }
+  auto GetDensity(MatID_t matID) const { return fDensities[matID]; }
+  auto GetNumberOfIsotopes(MatID_t matID) const { return NumberOfIsotopes[matID]; }
+  auto GetNMat() const { return NumberOfMaterials; }
+  int GetMaxNumberOfIsotopes() const {return Maxnumberofisotopes;}
 private:
-  std::vector<std::vector<PDG_t>> fMaterials;
-  std::vector<std::vector<double>> fFractions;
-  std::vector<double> fConcentrations;
-  std::vector<double> fDensities;
+  int Maxnumberofisotopes;
+  int NumberOfIsotopes[NumberOfMaterials];
+  PDG_t fMaterials[NumberOfMaterials][2];//maximum 2 isotopes in TiD2 and U mix.
+  double fFractions[NumberOfMaterials][2];
+  double fConcentrations[NumberOfMaterials];
+  double fDensities[NumberOfMaterials];
 };
 } // namespace t3
 

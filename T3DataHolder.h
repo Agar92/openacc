@@ -22,7 +22,6 @@
 #include <iomanip>
 #include <cfloat>
 
-#include "T3ArrayView.h"
 #include "T3Process.h"
 #include "T3ProcessImplFromCSandFS.h"
 #include "T3WrappedProcess.h"
@@ -34,6 +33,9 @@
 
 #include "T3ThreeVector.h"
 #include "T3LorentzVector.h"
+#include "T3Particle.h"
+#include "T3RNG.h"
+
 
 #ifdef OPENACC
 #include <accelmath.h>
@@ -42,61 +44,17 @@
 #include <cuda_runtime.h>
 #endif
 
-//----------------------------------------------//
-//Random number generator:
-//----------------------------------------------//
-class RNDGenerator
-{
-private:
-  unsigned int fseed;
-public:
-  void seed(unsigned int seed){fseed=seed;}
-  using result_type=unsigned int;
-  RNDGenerator():fseed(1){}
-  RNDGenerator(unsigned int seed):fseed(seed){}
-  result_type min() const {return 0u;}
-  result_type max() const {return 0xFFFFFFFF;}
-  result_type Rand32(unsigned int xn)
-  {
-    u_quad_t a=0x5DEECE66D;
-    u_quad_t c=0xB;
-    return (unsigned int)((a*xn+c) & 0xFFFFFFFF);
-  }
-  result_type operator()()
-  {
-    fseed=Rand32(fseed);
-    return fseed;
-  }
-};
+//cmake . -DCMAKE_C_COMPILER=pgcc -DCMAKE_CXX_COMPILER=pgc++ -DCMAKE_CXX_FLAGS="-acc -mcmodel=medium -ta=tesla:cc30,nollvm,managed -fast -Mcuda=cuda10.1" -DCMAKE_CXX_STANDARD=17
 
 using FloatingType = double;
-using RandGen = RNDGenerator;
+using RandGen = t3::RNDGenerator;
 
+using namespace t3;
 using namespace t3::units;
 
 namespace dataholder {
 
-  constexpr double TLS=10.0*MeV;
-  constexpr bool report = true;
-  constexpr bool reportTimes = false;
-  constexpr bool histogram = true;
-  constexpr long int G = 27;
-  constexpr int N = 99999;
-  constexpr int Np = N+1;
-  constexpr int INJ = 1000;
-  constexpr long int K = N+1;
-  constexpr unsigned int max_loop = 10;
-  constexpr int cuba = 16;
-  constexpr unsigned int Nbin = 8;
-  constexpr int DN = (N+1) / Nbin +1;
-  constexpr unsigned int BLt = 200000000 / Nbin;
-  constexpr unsigned int GL1 = BLt - 1;
-  constexpr double cgam = 5.0;
-  constexpr auto dcgam = cgam + cgam;
-  constexpr int cubn = cuba + cuba;
-  constexpr int cub2 = cubn * cubn;
-  constexpr int cub3 = cub2 * cubn;
-  constexpr double fuse = .25;
+  #define MIN(a, b) ((a<b)?a:b)
 //---------------------------//
   unsigned int SHIFT=0;
   unsigned int POSITION1=0;
@@ -136,50 +94,10 @@ namespace dataholder {
   const int BinNumber2=200;
   constexpr FloatingType InitParticlex0 = 0.5;
   constexpr FloatingType InitParticley0 = 0.5;
+  //number of elements in csBorderData array:
+  constexpr int NumberOfElementsInCSBorderDataArray=(t3::MaxNumberOfIsotopes+1)*Np;
   
 } // end of namespace dataholder
-
-constexpr FloatingType ag = 1.0e-5 * cm;//the width of the cell in cm
-
-template <typename Floating> struct Particle {
-  Particle()
-      : Particle<Floating>(t3::LorentzVector<Floating>(0.0,0.0,0.0,0.0),
-                           t3::LorentzVector<Floating>(1.0/sqrt(3.0),1.0/sqrt(2.0),1.0/sqrt(6.0),dataholder::G),
-                           0.0, t3::PDG_t(2112), 1.0, 0, 1, 1) {}
-
-  Particle(t3::LorentzVector<Floating> _r, t3::LorentzVector<Floating> _p, Floating _de, t3::PDG_t _pdg,
-           Floating _wt, RandGen::result_type _rs, int _ir, int _id);
-  t3::LorentzVector<Floating> r;// r = {rx, ry, rz, t}
-  t3::LorentzVector<Floating> p;// p = {px, py, pz, en}
-  Floating de;
-  Floating wt;
-  RandGen rs;
-  t3::PDG_t pdg;
-  int ir;
-  void SetEtot(Floating Etot, t3::ParticleTable aParticleTable)
-  {
-    const auto m = aParticleTable.GetMass(pdg);
-    const auto pnew = sqrt(Etot * Etot - m*m);
-    p.SetPxPyPzE(pnew*vx(), pnew*vy(), pnew*vz(), Etot);
-  }
-  Floating GetdE() const { return de; }
-  Floating GetEtot() const { return p.E(); }
-  Floating vx() const { return p.x() / p.R(); }
-  Floating vy() const { return p.y() / p.R(); }
-  Floating vz() const { return p.z() / p.R(); }
-  int ix() const { return static_cast<int>(std::floor(r.x() / ag)); }
-  int jy() const { return static_cast<int>(std::floor(r.y() / ag)); }
-  int kz() const { return static_cast<int>(std::floor(r.z() / ag)); }
-  int id;
-  auto GenerateCanonical() {
-     return t3::GenerateSubCanonical<Floating>(rs);
-  }
-};
-
-template <typename Floating>
-Particle<Floating>::Particle(t3::LorentzVector<Floating> _r, t3::LorentzVector<Floating> _p, Floating _de,
-                             t3::PDG_t _pdg, Floating _wt, RandGen::result_type _rs, int _ir, int _id)
-    : r{_r}, p{_p}, de(_de), pdg(_pdg), wt(_wt), rs(_rs), ir(_ir), id(_id){}
 
 namespace dataholder {
 
@@ -201,6 +119,11 @@ private:
   Floating csIsotropic[Np];
   Floating csDuplicate[Np];
   Floating csMultipleScattering[Np];
+  //array for T3MultipleScatteringFSImpl.h for storing
+  //csBorder arrays for each particle. In T3MultipleScatteringFSImpl.h
+  //the arrays are allocated dynamically, and here, i think it will
+  //be allocated statically.
+  Floating csBorderData[NumberOfElementsInCSBorderDataArray];
 
   t3::ParticleTable aParticleTable;
   t3::MaterialTable aMaterialTable;
@@ -232,17 +155,16 @@ private:
                    typename Multiple_scattering_t::Base_t::FS_t());
 public:
   DataHolder()
-    : aParticleTable(), aMaterialTable(), particles{}, ind01{}, ind23{}, arr1{}, arr2{}, arr3{},
-      outPDG1{}, outPDG2{}, outP1{}, outP2{}, csIsotropic{}, csDuplicate{},csMultipleScattering{},
+    : aParticleTable(), aMaterialTable(),  
       HTheta{}, HThetax{}, HThetay{} {
 
       //intialize histograms:
  //-------------------------------------------------------
-      lnHThetaMin=std::log(HThetaMin);
-      lnHThetaMax=std::log(HThetaMax);
+      lnHThetaMin=log(HThetaMin);
+      lnHThetaMax=log(HThetaMax);
       deltaTheta = (lnHThetaMax - lnHThetaMin)/BinNumber1;
       for(int m=0; m<BinNumber1; ++m)
-        OxTheta[m]=std::exp(lnHThetaMin+deltaTheta*(m+0.5));
+        OxTheta[m]=exp(lnHThetaMin+deltaTheta*(m+0.5));
 //-------------------------------------------------------
       deltaThetax = (HThetaxMax - HThetaxMin)/BinNumber2;
       for(int m=0; m<BinNumber2; ++m)
@@ -265,6 +187,10 @@ public:
 };
 
 template <typename Floating> void DataHolder<Floating>::Histogram_theta() {
+#ifdef OPENACC
+#pragma acc data copyout(HTheta)
+{
+#endif
   std::ofstream foutne_theta1;
   foutne_theta1.open("ne_theta1.dat");
   for(int m=0; m<BinNumber1; ++m)
@@ -298,6 +224,9 @@ template <typename Floating> void DataHolder<Floating>::Histogram_theta() {
     foutne_thetai<<std::endl;
   }
   foutne_thetai.close();
+#ifdef OPENACC
+}
+#endif
 }
 
 template <typename Floating> void DataHolder<Floating>::InitParticle() {
@@ -309,7 +238,7 @@ template <typename Floating> void DataHolder<Floating>::InitParticle() {
   auto const m = aParticleTable.GetMass(initPDG);
   auto const Tkinls = TLS;
   auto const InitEls= m+Tkinls;
-  const auto pls=std::sqrt(InitEls*InitEls-m*m);
+  const auto pls=sqrt(InitEls*InitEls-m*m);
   particles[LIFE] = Particle<Floating>(
      t3::LorentzVector<Floating>(InitParticlex0*ag,
        InitParticley0*ag,-cuba*ag,0.0),
@@ -632,19 +561,9 @@ template <typename Floating> void DataHolder<Floating>::Compress() {
 }
 
 template <typename Floating> void DataHolder<Floating>::Propagate() {  
-  auto inputlskinE = t3::makeAOSMemberView(
-      particles,
-      [this](Particle<Floating> const &particle)  {//[this] is necessary to access aParticleTable.
-        return particle.GetEtot() - aParticleTable.GetMass(particle.pdg);
-      });
-  auto inputPDG = t3::makeAOSMemberView(
-      particles,
-      [](Particle<Floating> const &particle)  {
-        return particle.pdg;
-      });
 
-  multiplescatteringProcess.GetCS(inputlskinE, inputPDG, t3::MatID_t(2u), LIFE,
-                                   csMultipleScattering);
+  multiplescatteringProcess.GetCS(particles, t3::MatID_t(2u), LIFE,
+                                  csMultipleScattering, &aParticleTable);
 
   constexpr Floating da = ag * 1e-10;
   constexpr Floating rho0 = 1.0;
@@ -701,25 +620,31 @@ template <typename Floating> void DataHolder<Floating>::Propagate() {
       Floating const csMScatteringi = csMultipleScatteringi;
       Floating const lambdar = 1.0/ntid2/csMScatteringi;
       auto const R = particles[i].GenerateCanonical();
-      Floating l2 = std::abs(lambdar * std::log(R));
-      Floating const l1 = std::min({l1x, l1y, l1z});
+      Floating l2 = fabs(lambdar * log(R));
+      //\\//Floating const l1 = std::min({l1x, l1y, l1z});
+      Floating const l1xy = MIN(l1x, l1y);
+      Floating const l1yz = MIN(l1y, l1z);
+      Floating const l1 = MIN(l1xy, l1yz);
       int const irc = (l0 < l2 && l0 < l1) ? 0 : ((l2 < l1) ? 2 : 1);
-      Floating const l = std::min({l1, l2, l0});
-      Floating const dl = std::abs(l);
+      //\\//Floating const l = std::min({l1, l2, l0});
+      Floating const l12 = MIN(l1, l2);
+      Floating const l20 = MIN(l2, l0);
+      Floating const l = MIN(l12, l20);
+      Floating const dl = fabs(l);
       auto const indexz = particles[i].kz();
 
-      if(irc == 1 && std::abs(l-l1z)<da)
+      if(irc == 1 && fabs(l-l1z)<da)
       {
           auto const modparticlei = particles[i].p.R();
           auto const costheta = particles[i].p.z()/modparticlei;
-          auto const theta = std::acos(costheta);
+          auto const theta = acos(costheta);
           const int id = particles[i].id;
-          auto const thetax=std::atan( particles[i].p.x()/particles[i].p.z() );//=px/pz.
-          auto const thetay=std::atan( particles[i].p.y()/particles[i].p.z() );//=py/pz.
+          auto const thetax=atan( particles[i].p.x()/particles[i].p.z() );//=px/pz.
+          auto const thetay=atan( particles[i].p.y()/particles[i].p.z() );//=py/pz.
           auto const x=particles[i].r.x() - InitParticlex0 * ag;
           auto const y=particles[i].r.y() - InitParticley0 * ag;
-          auto const r=std::sqrt(x*x+y*y);
-          const double logtheta=std::log(theta);
+          auto const r=sqrt(x*x+y*y);
+          const double logtheta=log(theta);
           const int ThetaBin=(logtheta-lnHThetaMin)/deltaTheta;
 //*          
           if(ThetaBin>=0 && ThetaBin<BinNumber1)
@@ -765,14 +690,14 @@ template <typename Floating> void DataHolder<Floating>::Propagate() {
         if (loss >= particles[i].GetEtot() - aParticleTable.GetMass(particles[i].pdg))
         {
           particles[i].de += particles[i].GetEtot() - aParticleTable.GetMass(particles[i].pdg);
-          particles[i].SetEtot(aParticleTable.GetMass(particles[i].pdg), aParticleTable);
+          particles[i].SetEtot(aParticleTable.GetMass(particles[i].pdg), &aParticleTable);
           particles[i].ir = 0;
         }
         else
         {
           Floating const old_energy = particles[i].GetEtot();
           Floating const new_energy = old_energy - loss;
-          particles[i].SetEtot(new_energy, aParticleTable);
+          particles[i].SetEtot(new_energy, &aParticleTable);
           bool check=false;
           bool cond=indexz*ag<particles[i].r.z() && particles[i].r.z()<=(indexz+1)*ag;
           particles[i].de += loss;
@@ -787,27 +712,11 @@ template <typename Floating> void DataHolder<Floating>::Propagate() {
   }//End of i-particle loop
 }
 
-template <typename Floating> void DataHolder<Floating>::React() {  
-  auto returnZeroMat = t3::makeConstantView(t3::MatID_t(2));
-  auto inputP = t3::makeAOSMemberView(
-      particles, [](Particle<Floating> const &particle) {
-        return particle.p;
-      });
-  auto inputPDG = t3::makeAOSMemberView(
-      particles, [](Particle<Floating> const &particle) {
-        return particle.pdg;
-      });
-  auto inputRNG = t3::makeAOSMemberView(
-      particles,
-      [](Particle<Floating> &particle) -> decltype(particle.rs) & {
-        return particle.rs;
-      });
-  auto const outPDGoutput = std::make_tuple(outPDG1, outPDG2);
-  auto const outPoutput = std::make_tuple(outP1, outP2);
-
-  multiplescatteringProcess.GetFS(inputP, inputPDG, returnZeroMat, inputRNG,
-                         POSITION23, outPDGoutput, outPoutput);
-
+template <typename Floating> void DataHolder<Floating>::React() {
+  
+  multiplescatteringProcess.GetFS(particles, t3::MatID_t(2), POSITION23,
+                                  outPDG1, outP1, outPDG2, outP2, csBorderData);
+  
 #ifdef OPENACC
 #pragma acc parallel loop
 #else

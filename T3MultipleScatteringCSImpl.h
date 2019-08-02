@@ -4,7 +4,6 @@
 
 #include "T3ParticleTable.h"
 #include "T3MaterialTable.h"
-#include "T3Util.h"
 #include "T3Defs.h"
 #include <cmath>
 
@@ -32,24 +31,24 @@ Floating MultipleScatteringCS<Floating>::GetCS(Floating e,
   auto const titanPDG    = aParticleTable.makePDGfromZandA(22, 48);
   auto const c=1.0;
   auto const alpha=1.0/137;
-  auto const ec=std::sqrt(alpha);
+  auto const ec=sqrt(alpha);
   auto const me=aParticleTable.GetMass(PDG_t(11));
   auto const h=1.0;
   auto const a0=h*h/me/ec/ec;
-  auto const CTF=1.0/2.0*std::pow(3*M_PI/4,2.0/3.0);
+  auto const CTF=1.0/2.0*pow(3*M_PI/4,2.0/3.0);
   auto const m=aParticleTable.GetMass(incPDG);
   auto const M=aParticleTable.GetMass(targetPDG);
   auto const z=aParticleTable.GetZ(incPDG);
   auto const Z=aParticleTable.GetZ(targetPDG);
   auto const Elsinc=m+e;
   auto const s=m*m+2*Elsinc*M+M*M;
-  auto const mr=m*M/std::sqrt(s);
+  auto const mr=m*M/sqrt(s);
   auto const pls2=e*(2*m+e);
   auto const rat=m/M;
   auto const rat2=rat*rat;
-  auto const pcm2=pls2/(1.0+rat2+2*std::sqrt(rat2+pls2/M/M));
-  auto const pcm=std::sqrt(pcm2);
-  auto const aI=CTF*a0/std::sqrt(std::pow(z, 2.0/3.0) + std::pow(Z, 2.0/3.0));
+  auto const pcm2=pls2/(1.0+rat2+2*sqrt(rat2+pls2/M/M));
+  auto const pcm=sqrt(pcm2);
+  auto const aI=CTF*a0/sqrt(pow(z, 2.0/3.0) + pow(Z, 2.0/3.0));
   auto const beta_r=1.0;
   auto const c12=alpha*z*Z/beta_r;
   auto const c122=c12*c12;
@@ -82,12 +81,12 @@ Floating MultipleScatteringCS<Floating>::GetCS(Floating e,
   Floating csIsotope[numi];
   for(size_t i=0; i<numi; ++i)
   {
-    csIsotope[i] = GetCS(e,incPDG,aMaterialTable.GetIsotopes(matID)[i]);
+    csIsotope[i] = GetCS(e,incPDG,aMaterialTable.GetIsotopes(matID,i));
   }
   auto cs=0.0;
   for(size_t i=0; i<numi; ++i)
   {
-    cs += aMaterialTable.GetFractions(matID)[i]*csIsotope[i];
+    cs += aMaterialTable.GetFractions(matID,i)*csIsotope[i];
   }
   return cs;
 }

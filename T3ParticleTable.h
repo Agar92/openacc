@@ -2,9 +2,7 @@
 #ifndef T3PARTICLETABLE_H
 #define T3PARTICLETABLE_H
 
-#include <atomic>
 #include <map>
-#include <vector>
 #include <iostream>
 
 #include "T3Defs.h"
