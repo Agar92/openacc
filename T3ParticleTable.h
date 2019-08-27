@@ -4,7 +4,7 @@
 
 #include <map>
 #include <iostream>
-
+#include "T3Globals.h"
 #include "T3Defs.h"
 
 namespace t3 {
@@ -12,6 +12,7 @@ using namespace units;
 class ParticleTable {
 public:
   ParticleTable();
+  /*ParticleTable(ParticleTable const &);*/
   auto IsNucleus(PDG_t aPDG) const;
   auto GetMass(PDG_t aPDG) const;
   auto GetZ(PDG_t aPDG) const;

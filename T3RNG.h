@@ -34,6 +34,18 @@ public:
   }
 };
 
+//From T3Util.h:
+template <typename Floating, typename RandomEngine>
+auto GenerateSubCanonical(RandomEngine &engine) {
+  auto const randomNumber = engine();
+  auto maxRandomNumber = engine.max();
+  auto maxRandomNumberAsFloating =
+      static_cast<Floating>(maxRandomNumber);
+  auto const result =
+      static_cast<Floating>(randomNumber) / 0xFFFFFFFF;
+  return result;
+}
+
 } // namespace t3
 
 #endif // T3RNG_H
