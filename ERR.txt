@@ -1,0 +1,215 @@
+[ 25%] Building CXX object CMakeFiles/Test.dir/nbody.cpp.o
+"/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_told_COPY_d/T3RNG.h",
+          line 42: warning: variable "maxRandomNumberAsFloating" was declared
+          but never referenced
+    auto maxRandomNumberAsFloating =
+         ^
+          detected during:
+            instantiation of "auto
+                      t3::GenerateSubCanonical<Floating,RandomEngine>(RandomEng
+                      ine &) [with Floating=FloatingType,
+                      RandomEngine=RandGen]" at line 70 of
+                      "/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_tol
+                      d_COPY_d/T3Particle.h"
+            instantiation of "auto t3::Particle<Floating>::GenerateCanonical()
+                      [with Floating=FloatingType]" at line 173 of
+                      "/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_tol
+                      d_COPY_d/T3DataHolder.h"
+
+"/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_told_COPY_d/T3MultipleSca
+          tteringCSImpl.h", line 39: warning: variable "c" was declared but
+          never referenced
+    auto const c=1.0;
+               ^
+          detected during:
+            instantiation of "Floating
+                      t3::MultipleScatteringCS<Floating>::GetCS(Floating,
+                      t3::PDG_t, t3::MatID_t, Floating *, const
+                      t3::ParticleTable &, const t3::MaterialTable &, int)
+                      const [with Floating=FloatingType]" at line 122 of
+                      "/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_tol
+                      d_COPY_d/T3Process.h"
+            instantiation of "auto
+                      t3::Process<ProcessImpl>::GetCS(t3::Particle<Floating> *,
+                      t3::MatID_t, uint64_t, Floating *, Floating *, const
+                      t3::ParticleTable &, const t3::MaterialTable &)
+                      const->bool [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<FloatingType>, t3::MultipleScatteringFS<true,
+                      FloatingType>>, Floating=FloatingType]" at line 147 of
+                      "/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_tol
+                      d_COPY_d/T3DataHolder.h"
+
+"/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_told_COPY_d/T3MultipleSca
+          tteringCSImpl.h", line 35: warning: variable "Tls" was declared but
+          never referenced
+    const Floating Tls=e-m;
+                   ^
+          detected during:
+            instantiation of "Floating
+                      t3::MultipleScatteringCS<Floating>::GetCS(Floating,
+                      t3::PDG_t, t3::PDG_t, const t3::ParticleTable &) const
+                      [with Floating=FloatingType]" at line 105
+            instantiation of "Floating
+                      t3::MultipleScatteringCS<Floating>::GetCS(Floating,
+                      t3::PDG_t, t3::MatID_t, Floating *, const
+                      t3::ParticleTable &, const t3::MaterialTable &, int)
+                      const [with Floating=FloatingType]" at line 122 of
+                      "/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_tol
+                      d_COPY_d/T3Process.h"
+            instantiation of "auto
+                      t3::Process<ProcessImpl>::GetCS(t3::Particle<Floating> *,
+                      t3::MatID_t, uint64_t, Floating *, Floating *, const
+                      t3::ParticleTable &, const t3::MaterialTable &)
+                      const->bool [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<FloatingType>, t3::MultipleScatteringFS<true,
+                      FloatingType>>, Floating=FloatingType]" at line 147 of
+                      "/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_tol
+                      d_COPY_d/T3DataHolder.h"
+
+"/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_told_COPY_d/T3MultipleSca
+          tteringFSImpl.h", line 56: warning: variable "fin" was declared but
+          never referenced
+    const size_t fin =init+numi;
+                 ^
+          detected during:
+            instantiation of "auto t3::ProcessImplFromCSandFS<CSImpl,
+                      FSImpl>::GetFS(Args &...) const [with
+                      CSImpl=t3::MultipleScatteringCS<FloatingType>,
+                      FSImpl=t3::MultipleScatteringFS<true, FloatingType>,
+                      Args=<t3::LorentzVector<FloatingType>, t3::PDG_t,
+                      t3::MatID_t, RandGen, FloatingType *, unsigned int, const
+                      t3::ParticleTable, const t3::MaterialTable>]" at line 173
+                      of
+                      "/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_tol
+                      d_COPY_d/T3Process.h"
+            instantiation of "auto
+                      t3::Process<ProcessImpl>::GetFS(t3::Particle<Floating> *,
+                      t3::MatID_t, uint64_t, t3::PDG_t *,
+                      t3::LorentzVector<Floating> *, t3::PDG_t *,
+                      t3::LorentzVector<Floating> *, Floating *, const
+                      t3::ParticleTable &, const t3::MaterialTable &)
+                      const->bool [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<FloatingType>, t3::MultipleScatteringFS<true,
+                      FloatingType>>, Floating=FloatingType]" at line 264 of
+                      "/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_tol
+                      d_COPY_d/T3DataHolder.h"
+
+"/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_told_COPY_d/T3MultipleSca
+          tteringFSImpl.h", line 76: warning: variable "Ede" was declared but
+          never referenced
+    auto Ede=0.0;
+         ^
+          detected during:
+            instantiation of "auto t3::ProcessImplFromCSandFS<CSImpl,
+                      FSImpl>::GetFS(Args &...) const [with
+                      CSImpl=t3::MultipleScatteringCS<FloatingType>,
+                      FSImpl=t3::MultipleScatteringFS<true, FloatingType>,
+                      Args=<t3::LorentzVector<FloatingType>, t3::PDG_t,
+                      t3::MatID_t, RandGen, FloatingType *, unsigned int, const
+                      t3::ParticleTable, const t3::MaterialTable>]" at line 173
+                      of
+                      "/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_tol
+                      d_COPY_d/T3Process.h"
+            instantiation of "auto
+                      t3::Process<ProcessImpl>::GetFS(t3::Particle<Floating> *,
+                      t3::MatID_t, uint64_t, t3::PDG_t *,
+                      t3::LorentzVector<Floating> *, t3::PDG_t *,
+                      t3::LorentzVector<Floating> *, Floating *, const
+                      t3::ParticleTable &, const t3::MaterialTable &)
+                      const->bool [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<FloatingType>, t3::MultipleScatteringFS<true,
+                      FloatingType>>, Floating=FloatingType]" at line 264 of
+                      "/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_tol
+                      d_COPY_d/T3DataHolder.h"
+
+"/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_told_COPY_d/T3MultipleSca
+          tteringFSImpl.h", line 185: warning: missing return statement at end
+          of non-void function "t3::MultipleScatteringFS<generateRecoil,
+          Floating>::GetFS(const t3::LorentzVector<Floating> &, t3::PDG_t,
+          t3::MatID_t, RandomEngine &, Floating *, int, const t3::ParticleTable
+          &, const t3::MaterialTable &) const [with generateRecoil=true,
+          Floating=FloatingType, RandomEngine=RandGen]"
+    }
+    ^
+          detected during:
+            instantiation of "auto t3::MultipleScatteringFS<generateRecoil,
+                      Floating>::GetFS(const t3::LorentzVector<Floating> &,
+                      t3::PDG_t, t3::MatID_t, RandomEngine &, Floating *, int,
+                      const t3::ParticleTable &, const t3::MaterialTable &)
+                      const [with generateRecoil=true, Floating=FloatingType,
+                      RandomEngine=RandGen]" at line 29 of
+                      "/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_tol
+                      d_COPY_d/T3ProcessImplFromCSandFS.h"
+            instantiation of "auto t3::ProcessImplFromCSandFS<CSImpl,
+                      FSImpl>::GetFS(Args &...) const [with
+                      CSImpl=t3::MultipleScatteringCS<FloatingType>,
+                      FSImpl=t3::MultipleScatteringFS<true, FloatingType>,
+                      Args=<t3::LorentzVector<FloatingType>, t3::PDG_t,
+                      t3::MatID_t, RandGen, FloatingType *, unsigned int, const
+                      t3::ParticleTable, const t3::MaterialTable>]" at line 173
+                      of
+                      "/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_tol
+                      d_COPY_d/T3Process.h"
+            instantiation of "auto
+                      t3::Process<ProcessImpl>::GetFS(t3::Particle<Floating> *,
+                      t3::MatID_t, uint64_t, t3::PDG_t *,
+                      t3::LorentzVector<Floating> *, t3::PDG_t *,
+                      t3::LorentzVector<Floating> *, Floating *, const
+                      t3::ParticleTable &, const t3::MaterialTable &)
+                      const->bool [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<FloatingType>, t3::MultipleScatteringFS<true,
+                      FloatingType>>, Floating=FloatingType]" at line 264 of
+                      "/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_tol
+                      d_COPY_d/T3DataHolder.h"
+
+"/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_told_COPY_d/T3MultipleSca
+          tteringFSImpl.h", line 74: warning: variable "tmin" was set but never
+          used
+    auto tmin=0.0;
+         ^
+          detected during:
+            instantiation of "auto t3::MultipleScatteringFS<generateRecoil,
+                      Floating>::GetFS(const t3::LorentzVector<Floating> &,
+                      t3::PDG_t, t3::MatID_t, RandomEngine &, Floating *, int,
+                      const t3::ParticleTable &, const t3::MaterialTable &)
+                      const [with generateRecoil=true, Floating=FloatingType,
+                      RandomEngine=RandGen]" at line 29 of
+                      "/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_tol
+                      d_COPY_d/T3ProcessImplFromCSandFS.h"
+            instantiation of "auto t3::ProcessImplFromCSandFS<CSImpl,
+                      FSImpl>::GetFS(Args &...) const [with
+                      CSImpl=t3::MultipleScatteringCS<FloatingType>,
+                      FSImpl=t3::MultipleScatteringFS<true, FloatingType>,
+                      Args=<t3::LorentzVector<FloatingType>, t3::PDG_t,
+                      t3::MatID_t, RandGen, FloatingType *, unsigned int, const
+                      t3::ParticleTable, const t3::MaterialTable>]" at line 173
+                      of
+                      "/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_tol
+                      d_COPY_d/T3Process.h"
+            instantiation of "auto
+                      t3::Process<ProcessImpl>::GetFS(t3::Particle<Floating> *,
+                      t3::MatID_t, uint64_t, t3::PDG_t *,
+                      t3::LorentzVector<Floating> *, t3::PDG_t *,
+                      t3::LorentzVector<Floating> *, Floating *, const
+                      t3::ParticleTable &, const t3::MaterialTable &)
+                      const->bool [with
+                      ProcessImpl=t3::ProcessImplFromCSandFS<t3::MultipleScatte
+                      ringCS<FloatingType>, t3::MultipleScatteringFS<true,
+                      FloatingType>>, Floating=FloatingType]" at line 264 of
+                      "/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_tol
+                      d_COPY_d/T3DataHolder.h"
+
+PGCC-S-0155-Cannot determine bounds for array this (/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_told_COPY_d/nbody.cpp: 279)
+PGCC-S-0155-Cannot determine bounds for array this (/home/70-gaa/NFbuild_script_CHECK_GPU/source_HOW_KMV_told_COPY_d/nbody.cpp: 279)
+PGCC/x86 Linux 19.4-0: compilation completed with severe errors
+CMakeFiles/Test.dir/build.make:88: recipe for target 'CMakeFiles/Test.dir/nbody.cpp.o' failed
+make[2]: *** [CMakeFiles/Test.dir/nbody.cpp.o] Error 2
+CMakeFiles/Makefile2:72: recipe for target 'CMakeFiles/Test.dir/all' failed
+make[1]: *** [CMakeFiles/Test.dir/all] Error 2
+Makefile:83: recipe for target 'all' failed
+make: *** [all] Error 2

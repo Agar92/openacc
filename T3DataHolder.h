@@ -38,7 +38,7 @@ using Multiple_scattering_t =
   t3::Process<t3::ProcessImplFromCSandFS<t3::MultipleScatteringCS<FloatingType>,
                                          t3::MultipleScatteringFS<true, FloatingType>>>;
 
-// typename is necessary for the compiler
+// typename is necessaru for the compiler
 // Multiple_scattering_t::Base_t::CS_t()
 // and Multiple_scattering_t::Base_t::FS_t()
 // are the anonymous temporary objects (r-values).
@@ -48,27 +48,13 @@ Multiple_scattering_t multiplescatteringProcess =
 
 //=======================================================================//
 
-Particle<FloatingType> particles[GL] __attribute__((aligned(64)));
-int ind01[Nbin][BLt] __attribute__((aligned(64)));
-int ind23[Nbin][BLt] __attribute__((aligned(64)));
-Particle<FloatingType> arr1[GL] __attribute__((aligned(64)));
-Particle<FloatingType> arr2[GL] __attribute__((aligned(64)));
-Particle<FloatingType> arr3[GL] __attribute__((aligned(64)));
-ParticleTable aParticleTable;
-MaterialTable aMaterialTable;
-FloatingType csMultipleScattering[GL];
-t3::PDG_t outPDG1[GL];
-t3::LorentzVector<FloatingType> outP1[GL];
-t3::PDG_t outPDG2[GL];
-t3::LorentzVector<FloatingType> outP2[GL];
-//array for T3MultipleScatteringFSImpl.h for storing
-//csBorder arrays for each particle.
-FloatingType csBorderDataCS[GL];//this is for GetCS() in Propagator().
-FloatingType csBorderDataFS[GL];//this is for GetFS() in Reactor().
+
 t3::PDG_t extrapdg[GL];
 FloatingType extram[GL];
 
-
+//********************************************//
+//Host variables and arrays:
+//********************************************//
 long int MAX_ELEMENT;
 unsigned int SHIFT;
 unsigned int POSITION3;
@@ -77,6 +63,7 @@ unsigned int POSITION1;
 unsigned int POSITION0;
 unsigned int POSITION23;
 int LIFE=0;
+
 
 unsigned int sizep=sizeof(Particle<FloatingType>);
 int push=0;
@@ -108,10 +95,35 @@ int dL;
 int DL;
 int n;
 int numbin;
+//********************************************//
+//End of host variables and arrays.
+//********************************************//
 
 class DataHolder
 {
 public:
+  Particle<FloatingType> particles[GL] __attribute__((aligned(64)));
+  int ind01[Nbin][BLt] __attribute__((aligned(64)));
+  int ind23[Nbin][BLt] __attribute__((aligned(64)));
+  Particle<FloatingType> arr1[GL] __attribute__((aligned(64)));
+  Particle<FloatingType> arr2[GL] __attribute__((aligned(64)));
+  Particle<FloatingType> arr3[GL] __attribute__((aligned(64)));  
+  ParticleTable aParticleTable;
+  MaterialTable aMaterialTable;
+  FloatingType csMultipleScattering[GL];
+  t3::PDG_t outPDG1[GL];
+  t3::PDG_t outPDG2[GL];
+  t3::LorentzVector<FloatingType> outP1[GL];
+  t3::LorentzVector<FloatingType> outP2[GL];
+//array for T3MultipleScatteringFSImpl.h for storing
+//csBorder arrays for each particle. In T3MultipleScatteringFSImpl.h
+//the arrays are allocated dynamically, and here, i think it will
+//be allocated statically.
+  FloatingType csBorderDataCS[GL];//this is for GetCS() in Propagator().
+  FloatingType csBorderDataFS[GL];  //this is for GetFS() in Reactor().
+
+
+  
   void propagator();
   void reactor();
   void InitParticle();
@@ -129,7 +141,7 @@ void DataHolder::propagator()
                                   /*for storing cross sections on all isotopes of the material*/
                                   csMultipleScattering, csBorderDataCS,
                                   aParticleTable, aMaterialTable);
-  
+
 #ifdef OPENACC
 #pragma acc parallel loop copy(LIFE) present(particles,csMultipleScattering)
 #else
@@ -212,6 +224,8 @@ void DataHolder::propagator()
     if(loss>=particles[i].GetEtot() || particles[i].GetEtot()<=1.)
     {
       particles[i].de=particles[i].GetEtot();
+      //ERROR:
+      ///\\\///particles[i].p.SetE(0.0);
 #ifdef PROBLEM1
       particles[i].SetEtot(0.0, aParticleTable, extrapdg, extram, i);
 #endif
@@ -219,6 +233,8 @@ void DataHolder::propagator()
     }
     else
     {
+      //ERROR:
+      ///\\\///particles[i].p.SetE(particles[i].p.E()-loss);
 #ifdef PROBLEM1
       particles[i].SetEtot(particles[i].p.E()-loss, aParticleTable, extrapdg, extram, i);
 #endif      
@@ -246,7 +262,7 @@ void DataHolder::reactor()
   for (unsigned int i = 0; i < POSITION23; ++i) {
     particles[i].p = outP1[i];
     particles[i+SHIFT].p = outP2[i];
-  }
+  }  
 }//End of Reactor
 
 void DataHolder::InitParticle()

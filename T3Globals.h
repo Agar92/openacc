@@ -30,7 +30,7 @@
 //at GL=100000; fails with:
 //Failing in Thread:1
 //call to cuStreamSynchronize returned error 700: Illegal address during kernel execution
-const unsigned int GL=1000000;//1000000;
+  const unsigned int GL=20000;//1000000;
   const int N=0;
   const long int K=GL;
   const unsigned int Nbin=1;

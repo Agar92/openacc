@@ -31,9 +31,13 @@ int main(int argc, char **argv)
   LIFE=0;
   MAX_ELEMENT=0;
   int step=0;
-  bool checkpdg=false;
 #ifdef OPENACC
-#pragma acc data create(particles,ind01,ind23,arr1,arr2,arr3,extrapdg,extram,outPDG1,outPDG2,outP1,outP2,csBorderDataCS,csBorderDataFS,csMultipleScattering,aParticleTable,aMaterialTable/*multiplescatteringProcess*/,d) copy(ag,lambda,dtheta0,da,rho0,Dan)
+//////\\\\\\//////#pragma acc data create(particles,ind01,ind23,arr1,arr2,arr3,extrapdg,extram,outPDG1,outPDG2,outP1,outP2,csBorderDataCS,csBorderDataFS,csMultipleScattering,aParticleTable,aMaterialTable/*multiplescatteringProcess*/,d) copy(ag,lambda,dtheta0,da,rho0,Dan)
+/////\\\\\/////#pragma acc data create(particles,ind01,ind23,arr1,arr2,arr3,extrapdg,extram,outPDG1,outPDG2,outP1,outP2,csBorderDataCS,csBorderDataFS,csMultipleScattering,d) copy(ag,lambda,dtheta0,da,rho0,Dan)
+////\\\\////#pragma acc data create(particles,ind01,ind23,arr1,arr2,arr3,extrapdg,extram,outPDG1,outPDG2,outP1,outP2,csBorderDataCS,csBorderDataFS) copy(d) copy(ag,lambda,dtheta0,da,rho0,Dan)
+///\\\///#pragma acc data create(particles,ind01,ind23,arr1,arr2,arr3,extrapdg,extram,outPDG1,outPDG2,outP1,outP2) copy(d) copy(ag,lambda,dtheta0,da,rho0,Dan)
+//\\//#pragma acc data create(particles,ind01,ind23,arr1,arr2,arr3,extrapdg,extram) copy(d) copy(ag,lambda,dtheta0,da,rho0,Dan)
+#pragma acc data create(extrapdg,extram) copy(d) copy(ag,lambda,dtheta0,da,rho0,Dan)
   {
 #endif
     d.InitParticle();

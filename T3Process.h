@@ -116,7 +116,7 @@ auto Process<ProcessImpl>::GetCS(Particle<Floating> * particles,
 #pragma omp parallel for simd
 #endif
 //
-  for (int ind=0; ind < N; ++ind) {
+  for (auto ind=0u; ind < N; ++ind) {
     //outputCSArray[ind] = fProcessImpl.GetCS(particles[ind].p.E() - aParticleTable.GetMass(particles[ind].pdg), particles[ind].pdg, matID, aParticleTable);
     outputCSArray[ind] = fProcessImpl.GetCS(particles[ind].p.E(), particles[ind].pdg, matID,
                                             csBorderDataCS, aParticleTable, aMaterialTable, ind);
