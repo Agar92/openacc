@@ -12,7 +12,7 @@ using namespace units;
 class ParticleTable {
 public:
   ParticleTable();
-  /*ParticleTable(ParticleTable const &);*/
+  /*ParticleTable(const ParticleTable & aParticleTable);*/
   auto IsNucleus(PDG_t aPDG) const;
   auto GetMass(PDG_t aPDG) const;
   auto GetZ(PDG_t aPDG) const;
@@ -35,7 +35,7 @@ inline std::pair<uint64_t, uint64_t> ParticleTable::GetZA(PDG_t aPDG) const {
   }
   auto const baryonNumber = (aPDG / 10) % 1000;
   auto const protonNumber = (aPDG / 10000) % 1000;
-  return std::make_pair(std::move(protonNumber), std::move(baryonNumber));
+  return std::make_pair(protonNumber, baryonNumber);
 }
 
 inline auto ParticleTable::IsNucleus(PDG_t aPDG) const { return aPDG > nucleusPDGStartAfter; }
@@ -52,6 +52,10 @@ inline PDG_t ParticleTable::makePDGfromZandA(uint64_t protonNumber,
 
 inline auto ParticleTable::GetMass(PDG_t aPDG) const
 {
+  //\\//std::cout<<"aPDG="<<aPDG<<std::endl;
+//#1
+//THIS GIVES AN ERROR:
+  /*
   if(aPDG!=makePDGfromZandA(1, 2) || aPDG!=makePDGfromZandA(22, 48)){}
   if(aPDG > nucleusPDGStartAfter)
   {
@@ -72,7 +76,46 @@ inline auto ParticleTable::GetMass(PDG_t aPDG) const
     }
   }
   return fMasses.at(aPDG);
+  */
+//#2
+//THIS WORKS CORRECTLY:
+  /*
+  auto m=0.0;
+  switch(aPDG)
+  {
+  case PDG_t(22):
+    m=0.0;
+    break;
+  case PDG_t(11):
+    m=electronMass;
+    break;
+  case PDG_t(-11):
+    m=electronMass;
+    break;
+  case PDG_t(2212):
+    m=protonMass;
+    break;
+  case PDG_t(2112):
+    m=neutronMass;
+    break;
+  default:
+    m=0.0;
+    break;
+  }
+  return m;
+  */
+//#3
+//THIS WORKS CORRECTLY:  
+  //*
+  auto m=0.0;
+  if(aPDG==PDG_t(22)) m=0.0;
+  else if(aPDG==PDG_t(11)) m=electronMass;
+  else if(aPDG==PDG_t(-11)) m=electronMass;
+  else if(aPDG==PDG_t(2212)) m=protonMass;
+  else if(aPDG==PDG_t(2112)) m=neutronMass;
+  return m;
+  //*/
 }
+  
 } // namespace t3
-
 #endif // T3PARTICLETABLE_H

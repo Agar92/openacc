@@ -16,7 +16,7 @@
   struct float3{
     float x, y, z;
   };
-  struct float3{
+  struct float4{
     float x, y, z, w;
   };
 #endif
@@ -26,7 +26,11 @@
 
 //variables:
   const long int G=2000;
-  const unsigned int GL=200000;
+//at GL=2000000 call to cuMemAlloc returned error 2: Out of memory
+//at GL=100000; fails with:
+//Failing in Thread:1
+//call to cuStreamSynchronize returned error 700: Illegal address during kernel execution
+const unsigned int GL=1000000;//1000000;
   const int N=0;
   const long int K=GL;
   const unsigned int Nbin=1;
